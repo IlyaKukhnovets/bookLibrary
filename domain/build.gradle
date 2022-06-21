@@ -1,0 +1,12 @@
+plugins {
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+dependencies {
+
+    //Kotlin Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+
+    implementation "androidx.paging:paging-common:$paging_version"
+}
