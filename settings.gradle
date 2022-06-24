@@ -14,8 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BookApp"
 include ':app'
-include ':di'
-include ':remote'
-include ':local'
-include ':data'
-include ':domain'
