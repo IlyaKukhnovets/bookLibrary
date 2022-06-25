@@ -49,6 +49,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
+    //ViewBinding
+    api 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.7'
+
     //KTX
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "androidx.activity:activity-ktx:$activity_ktx_version"
@@ -81,5 +84,4 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
 
-    implementation 'com.ncapdevi:frag-nav:3.3.0'
 }
