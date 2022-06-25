@@ -1,4 +1,4 @@
-package com.example.bookapp.base
+package com.example.bookapp.presentation.base
 
 import android.content.Context
 import android.os.Bundle

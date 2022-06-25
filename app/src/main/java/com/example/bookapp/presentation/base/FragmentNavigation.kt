@@ -1,4 +1,4 @@
-package com.example.bookapp.base
+package com.example.bookapp.presentation.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
