@@ -1,4 +1,4 @@
-package com.example.bookapp.presentation.home
+package com.example.bookapp.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
