@@ -16,7 +16,7 @@ interface BaseRecyclerItem<BINDING : ViewBinding, VS : Any> {
 
     fun renderView(binding: BINDING, positionInAdapter: Int = 0)
 
-    fun recyclerView(binding: BINDING?)
+    fun recyclerView(binding: BINDING?){}
 
     fun areItemsTheSame(oldItem: BaseRecyclerItem<*, VS>?): Boolean {
         return viewState == oldItem?.viewState
