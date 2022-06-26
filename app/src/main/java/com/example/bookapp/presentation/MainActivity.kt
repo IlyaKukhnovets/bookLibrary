@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityMainBinding
-import com.example.bookapp.presentation.home.MainBooksFragmentContainer
+import com.example.bookapp.presentation.ui.home.MainBooksFragmentContainer
 
 class MainActivity : AppCompatActivity() {
 
