@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
 }
 
 android {
@@ -42,24 +41,19 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     testImplementation "junit:junit:$junit_version"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     //ViewBinding
-    api 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.7'
+    api 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.6'
 
     //KTX
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "androidx.activity:activity-ktx:$activity_ktx_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata_ktx_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_java_version"
-
-    //Timber
-    implementation "com.jakewharton.timber:timber:$timber_version"
 
     //Retrofit
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
