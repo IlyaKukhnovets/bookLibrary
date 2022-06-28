@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityMainBinding
 import com.example.bookapp.presentation.ui.home.MainBooksFragmentContainer
+import dagger.android.AndroidInjection
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        AndroidInjection.inject(this)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
