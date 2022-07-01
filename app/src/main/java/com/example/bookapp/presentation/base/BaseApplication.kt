@@ -1,6 +1,7 @@
 package com.example.bookapp.presentation.base
 
 import android.app.Application
+import com.example.bookapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -17,6 +18,7 @@ abstract class BaseApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
+        DaggerAppComponent.builder().context(this).build().injectApp(this)
     }
 
 }

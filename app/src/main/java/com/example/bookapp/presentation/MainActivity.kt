@@ -2,21 +2,30 @@ package com.example.bookapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityMainBinding
 import com.example.bookapp.presentation.ui.home.MainBooksFragmentContainer
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
+
+    var androidInjector: DispatchingAndroidInjector<Any>? = null
+        @Inject set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         initView()
         initViewModel()
     }
 
     private fun initView() {
-        AndroidInjection.inject(this)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
@@ -25,5 +34,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewModel() {
 
+    }
+
+    override fun androidInjector(): DispatchingAndroidInjector<Any>? {
+        return androidInjector
     }
 }
