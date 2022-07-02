@@ -6,11 +6,15 @@ import dagger.Module
 
 @Module(
     includes = [
-        BooksModule::class
+        BooksModule::class,
+        MainActivityModule::class,
     ]
 )
 
 interface PresentationModule {
     @Binds
     fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    fun bindFragmentFactory(factory: FragmentFactory): androidx.fragment.app.FragmentFactory
 }
