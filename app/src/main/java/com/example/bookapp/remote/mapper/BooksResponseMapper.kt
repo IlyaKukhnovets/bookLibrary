@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class BooksResponseMapper @Inject constructor() : Mapper<BooksResponse, List<BookItemModel>> {
     override fun invoke(response: BooksResponse): List<BookItemModel> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 }

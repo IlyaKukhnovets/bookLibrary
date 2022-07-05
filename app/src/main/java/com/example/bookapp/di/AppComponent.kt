@@ -1,6 +1,7 @@
 package com.example.bookapp.di
 
 import android.content.Context
+import com.example.bookapp.di.presentation.PresentationModule
 import com.example.bookapp.presentation.base.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         PresentationModule::class,
-        AndroidInjectionModule::class
+        AndroidInjectionModule::class,
+        ModelModule::class
     ]
 )
 interface AppComponent {

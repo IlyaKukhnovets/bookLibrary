@@ -1,4 +1,4 @@
-package com.example.bookapp.di
+package com.example.bookapp.di.presentation
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel

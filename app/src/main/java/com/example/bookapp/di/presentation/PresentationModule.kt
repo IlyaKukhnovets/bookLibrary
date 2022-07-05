@@ -1,6 +1,9 @@
-package com.example.bookapp.di
+package com.example.bookapp.di.presentation
 
 import androidx.lifecycle.ViewModelProvider
+import com.example.bookapp.di.FragmentFactory
+import com.example.bookapp.di.MainActivityModule
+import com.example.bookapp.di.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 
