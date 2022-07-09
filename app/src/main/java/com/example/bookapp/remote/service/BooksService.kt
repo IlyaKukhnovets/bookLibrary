@@ -5,6 +5,10 @@ import retrofit2.http.GET
 
 interface BooksService {
 
-    @GET
-    suspend fun getBooks(): BooksResponse
+    companion object {
+        private const val SERVICE_PREFIX = "Books"
+    }
+
+    @GET(SERVICE_PREFIX)
+    suspend fun getBooks(): List<BooksResponse>
 }
