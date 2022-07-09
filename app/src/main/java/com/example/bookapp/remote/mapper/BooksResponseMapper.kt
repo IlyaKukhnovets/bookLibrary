@@ -7,6 +7,13 @@ import javax.inject.Inject
 
 class BooksResponseMapper @Inject constructor() : Mapper<List<BooksResponse>, List<BookItemModel>> {
     override fun invoke(response: List<BooksResponse>): List<BookItemModel> {
-        return emptyList()
+        return response.map { book ->
+            BookItemModel(
+                name = book.name,
+                author = book.author,
+                image = book.src,
+                status = book.status
+            )
+        }
     }
 }
