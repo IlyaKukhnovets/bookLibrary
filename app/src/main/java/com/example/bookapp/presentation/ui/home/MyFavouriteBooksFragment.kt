@@ -7,8 +7,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentMyFavouriteBooksBinding
 import com.example.bookapp.presentation.base.BaseFragment
+import javax.inject.Inject
 
-class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_books) {
+class MyFavouriteBooksFragment @Inject constructor(): BaseFragment(R.layout.fragment_my_favourite_books) {
 
     companion object {
         fun getArguments() = bundleOf()
