@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Title">
+        <item name="android:textSize">@dimen/font_size_30_32</item>
+    </style>
+
+    <style name="Title.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Title.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Base">
+        <item name="android:textSize">@dimen/font_size_14_16</item>
+    </style>
+
+    <style name="Base.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Base.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Base.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Secondary">
+        <item name="android:textSize">@dimen/font_size_10_12</item>
+    </style>
+
+    <style name="Secondary.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Secondary.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Secondary.Disabled">
+        <item name="android:textColor">@color/text_disabled</item>
+    </style>
+
+</resources>
