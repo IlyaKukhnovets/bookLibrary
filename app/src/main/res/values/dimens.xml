@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_size_38_40">38dp</dimen>
+    <dimen name="font_size_30_32">30dp</dimen>
+    <dimen name="font_size_24_30">24dp</dimen>
+    <dimen name="font_size_20_24">20dp</dimen>
+    <dimen name="font_size_16_20">16dp</dimen>
+    <dimen name="font_size_14_16">14dp</dimen>
+    <dimen name="font_size_12_14">12dp</dimen>
+    <dimen name="font_size_10_12">10dp</dimen>
+</resources>
