@@ -18,10 +18,6 @@ import javax.inject.Inject
 class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider.Factory) :
     BaseFragment(R.layout.fragment_books) {
 
-    companion object {
-        fun getArguments() = bundleOf()
-    }
-
     private val binding by viewBinding(FragmentBooksBinding::bind)
 
     private val viewModel by lazy { injectViewModel<MyBooksViewModel>(factory) }
@@ -35,10 +31,14 @@ class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider
 
     private fun initView() {
         binding.list.rvRecycler.adapter = adapter
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.refreshBooks()
+        }
     }
 
     private fun initViewModel() {
         viewModel.booksLiveData.observe(viewLifecycleOwner) {
+            binding.refreshLayout.isRefreshing = false
             adapter.replaceElementsWithDiffUtil(it)
         }
     }

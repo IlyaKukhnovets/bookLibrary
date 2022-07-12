@@ -10,7 +10,7 @@ import com.example.bookapp.presentation.viewstate.BookItemViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MyBooksViewModel @Inject constructor(
+class MyBooksTopViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
     private val viewStateMapper: BookItemViewStateMapper
 ) : ViewModel() {
@@ -19,10 +19,6 @@ class MyBooksViewModel @Inject constructor(
     val booksLiveData: LiveData<List<BookItemTopViewState>> = _booksLiveData
 
     init {
-        refreshBooks()
-    }
-
-    fun refreshBooks() {
         viewModelScope.launch {
             _booksLiveData.postValue(viewStateMapper(booksRepository.getBooksList()))
         }
