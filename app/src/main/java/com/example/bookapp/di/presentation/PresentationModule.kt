@@ -15,6 +15,7 @@ import dagger.Module
 )
 
 interface PresentationModule {
+
     @Binds
     fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 

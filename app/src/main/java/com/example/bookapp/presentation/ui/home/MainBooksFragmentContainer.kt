@@ -16,14 +16,7 @@ import com.example.bookapp.presentation.viewstate.BookItemTopViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
-class MainBooksFragmentContainer : BaseFragment(R.layout.fragment_books_container) {
-
-    companion object {
-        fun getArguments() = bundleOf()
-    }
-
-    @Inject
-    private val factory: ViewModelProvider.Factory = TODO()
+class MainBooksFragmentContainer @Inject constructor(private val factory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_books_container) {
 
     private val binding by viewBinding(FragmentBooksContainerBinding::bind)
     private val viewModel by lazy { injectViewModel<MyBooksTopViewModel>(factory) }

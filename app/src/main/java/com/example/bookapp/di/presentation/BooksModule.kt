@@ -20,21 +20,21 @@ interface BooksModule {
     @Binds
     @IntoMap
     @FragmentKey(MainBooksFragmentContainer::class)
-    fun bindBooksFragment(fragment: MainBooksFragmentContainer): Fragment
+    fun bindMainBooksContainerFragment(fragment: MainBooksFragmentContainer): Fragment
 
     @Binds
     @IntoMap
     @FragmentKey(MyFavouriteBooksFragment::class)
-    fun bindBooksFragment(fragment: MyFavouriteBooksFragment): Fragment
+    fun bindFavouriteBooksFragment(fragment: MyFavouriteBooksFragment): Fragment
 
     @Binds
     @IntoMap
     @ViewModelKey(MyBooksViewModel::class)
-    fun bindBooksViewModel(viewModel: MyBooksViewModel): ViewModel
+    fun bindMyBooksViewModel(viewModel: MyBooksViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(MyBooksTopViewModel::class)
-    fun bindBooksViewModel(viewModel: MyBooksTopViewModel): ViewModel
+    fun bindMyBooksTopViewModel(viewModel: MyBooksTopViewModel): ViewModel
 
 }
