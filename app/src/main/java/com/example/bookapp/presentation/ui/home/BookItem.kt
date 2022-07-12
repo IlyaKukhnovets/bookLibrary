@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.bookapp.R
-import com.example.bookapp.databinding.ItemBookTopBinding
 import com.example.bookapp.databinding.ItemMyBooksBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
-import com.example.bookapp.presentation.viewstate.BookItemTopViewState
+import com.example.bookapp.presentation.viewstate.BookItemViewState
 
-class BookItem(override val viewState: BookItemTopViewState) :
-    BaseRecyclerItem<ItemMyBooksBinding, BookItemTopViewState> {
+class BookItem(override val viewState: BookItemViewState) :
+    BaseRecyclerItem<ItemMyBooksBinding, BookItemViewState> {
 
     override fun getViewId(): Int = R.layout.item_my_books
 

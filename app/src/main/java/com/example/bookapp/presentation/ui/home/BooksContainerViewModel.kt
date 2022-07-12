@@ -5,18 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.data.repository.BooksRepository
-import com.example.bookapp.presentation.viewstate.BookItemTopViewState
+import com.example.bookapp.presentation.viewstate.BookItemViewState
 import com.example.bookapp.presentation.viewstate.BookItemViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MyBooksTopViewModel @Inject constructor(
+class BooksContainerViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
     private val viewStateMapper: BookItemViewStateMapper
 ) : ViewModel() {
 
-    private val _booksLiveData = MutableLiveData<List<BookItemTopViewState>>()
-    val booksLiveData: LiveData<List<BookItemTopViewState>> = _booksLiveData
+    private val _booksLiveData = MutableLiveData<List<BookItemViewState>>()
+    val booksLiveData: LiveData<List<BookItemViewState>> = _booksLiveData
 
     init {
         viewModelScope.launch {

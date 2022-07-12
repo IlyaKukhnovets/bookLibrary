@@ -19,8 +19,8 @@ interface BooksModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(MainBooksFragmentContainer::class)
-    fun bindMainBooksContainerFragment(fragment: MainBooksFragmentContainer): Fragment
+    @FragmentKey(BooksFragmentContainer::class)
+    fun bindMainBooksContainerFragment(fragment: BooksFragmentContainer): Fragment
 
     @Binds
     @IntoMap
@@ -34,7 +34,7 @@ interface BooksModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MyBooksTopViewModel::class)
-    fun bindMyBooksTopViewModel(viewModel: MyBooksTopViewModel): ViewModel
+    @ViewModelKey(BooksContainerViewModel::class)
+    fun bindMyBooksTopViewModel(viewModel: BooksContainerViewModel): ViewModel
 
 }
