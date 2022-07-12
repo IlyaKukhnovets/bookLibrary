@@ -2,7 +2,6 @@ package com.example.bookapp.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,7 +15,8 @@ import com.example.bookapp.presentation.viewstate.BookItemTopViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
-class MainBooksFragmentContainer @Inject constructor(private val factory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_books_container) {
+class MainBooksFragmentContainer @Inject constructor(private val factory: ViewModelProvider.Factory) :
+    BaseFragment(R.layout.fragment_books_container) {
 
     private val binding by viewBinding(FragmentBooksContainerBinding::bind)
     private val viewModel by lazy { injectViewModel<MyBooksTopViewModel>(factory) }
@@ -34,7 +34,7 @@ class MainBooksFragmentContainer @Inject constructor(private val factory: ViewMo
             MyFavouriteBooksFragment::class to Bundle()
         )
         val titles = listOf(
-            "My Books", "My favourite books"
+            "Книги", "Избранное"
         )
         val pagerAdapter = ViewPager2Adapter(this, fragments)
         binding.viewPager.adapter = pagerAdapter

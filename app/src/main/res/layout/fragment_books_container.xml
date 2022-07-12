@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
+            app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
@@ -30,6 +31,7 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
+                    style="@style/TabLayout"
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"

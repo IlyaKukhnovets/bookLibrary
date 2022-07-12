@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:backgroundTint">@color/background_page</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+</resources>

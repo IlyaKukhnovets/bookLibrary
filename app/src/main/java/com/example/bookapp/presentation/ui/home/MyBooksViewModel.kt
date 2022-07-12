@@ -19,6 +19,10 @@ class MyBooksViewModel @Inject constructor(
     val booksLiveData: LiveData<List<BookItemTopViewState>> = _booksLiveData
 
     init {
+        refreshBooks()
+    }
+
+    fun refreshBooks() {
         viewModelScope.launch {
             _booksLiveData.postValue(viewStateMapper(booksRepository.getBooksList()))
         }

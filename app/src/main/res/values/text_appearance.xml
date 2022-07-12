@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Title style-->
     <style name="Title">
         <item name="android:textSize">@dimen/font_size_30_32</item>
     </style>
@@ -13,6 +14,24 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
+    <!--SubHeader style-->
+    <style name="SubHeader">
+        <item name="android:textSize">@dimen/font_size_16_20</item>
+    </style>
+
+    <style name="SubHeader.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubHeader.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubHeader.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!--Base style-->
     <style name="Base">
         <item name="android:textSize">@dimen/font_size_14_16</item>
     </style>
@@ -29,6 +48,7 @@
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 
+    <!--Secondary style-->
     <style name="Secondary">
         <item name="android:textSize">@dimen/font_size_10_12</item>
     </style>

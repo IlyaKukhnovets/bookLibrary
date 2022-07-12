@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         AndroidInjection.inject(this)
         supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-        //TODO: разблокировать когда будут готовы темы
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) TODO: разблокировать когда будут готовы темы
         initView()
     }
 
