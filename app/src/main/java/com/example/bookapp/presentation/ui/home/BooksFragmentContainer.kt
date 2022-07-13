@@ -11,15 +11,15 @@ import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
-import com.example.bookapp.presentation.viewstate.BookItemTopViewState
+import com.example.bookapp.presentation.viewstate.BookItemViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
-class MainBooksFragmentContainer @Inject constructor(private val factory: ViewModelProvider.Factory) :
+class BooksFragmentContainer @Inject constructor(private val factory: ViewModelProvider.Factory) :
     BaseFragment(R.layout.fragment_books_container) {
 
     private val binding by viewBinding(FragmentBooksContainerBinding::bind)
-    private val viewModel by lazy { injectViewModel<MyBooksTopViewModel>(factory) }
+    private val viewModel by lazy { injectViewModel<BooksContainerViewModel>(factory) }
     private val adapter = BaseRecyclerViewAdapter(mapper = ::mapItem)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,8 +30,8 @@ class MainBooksFragmentContainer @Inject constructor(private val factory: ViewMo
 
     private fun initView() {
         val fragments = listOf(
-            MyBooksFragment::class to Bundle(),
-            MyFavouriteBooksFragment::class to Bundle()
+            MyBooksFragment::class to Bundle.EMPTY,
+            MyFavouriteBooksFragment::class to Bundle.EMPTY
         )
         val titles = listOf(
             "Книги", "Избранное"
@@ -55,6 +55,6 @@ class MainBooksFragmentContainer @Inject constructor(private val factory: ViewMo
         }
     }
 
-    private fun mapItem(viewState: BookItemTopViewState) = BookTopItem(viewState)
+    private fun mapItem(viewState: BookItemViewState) = BookTopItem(viewState)
 
 }

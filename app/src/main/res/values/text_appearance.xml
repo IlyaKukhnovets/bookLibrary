@@ -16,7 +16,7 @@
 
     <!--SubHeader style-->
     <style name="SubHeader">
-        <item name="android:textSize">@dimen/font_size_16_20</item>
+        <item name="android:textSize">@dimen/font_size_20_24</item>
     </style>
 
     <style name="SubHeader.Bold">
@@ -28,6 +28,14 @@
     </style>
 
     <style name="SubHeader.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="SubHeader.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubHeader.Bold.Secondary">
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 

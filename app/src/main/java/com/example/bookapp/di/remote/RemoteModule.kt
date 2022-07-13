@@ -1,14 +1,16 @@
 package com.example.bookapp.di.remote
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.bookapp.remote.moshi.MoshiProvider
 import com.example.bookapp.remote.service.BooksService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 object RemoteModule {
@@ -17,8 +19,12 @@ object RemoteModule {
     private const val REMOTE_PATH = "https://jiggishattack.backendless.app/api/data"
 
     @Provides
-    fun providesRetrofit(converterFactory: Converter.Factory): Retrofit {
+    fun providesRetrofit(
+        okHttpClient: OkHttpClient,
+        converterFactory: Converter.Factory
+    ): Retrofit {
         return Retrofit.Builder()
+            .client(okHttpClient)
             .baseUrl("$REMOTE_PATH/")
             .addConverterFactory(converterFactory)
             .build()
@@ -28,6 +34,21 @@ object RemoteModule {
     fun providesMoshi(): Moshi {
         return MoshiProvider.getInstance()
     }
+
+    @Provides
+    fun providesChuck(context: Context): ChuckerInterceptor {
+        return ChuckerInterceptor
+            .Builder(context)
+            .build()
+    }
+
+    @Provides
+    fun providesApiOkHttpClient(chuckInterceptor: ChuckerInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(chuckInterceptor)
+            .build()
+    }
+
 
     @Provides
     fun providesMoshiConverterFactory(moshi: Moshi): Converter.Factory {

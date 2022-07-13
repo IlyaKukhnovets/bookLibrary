@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -9,14 +10,15 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:background="@color/background_page"
+        android:background="@color/background_page"
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_collapseMode="pin"
+            android:background="@color/background_page"
             app:contentInsetStart="0dp"
+            app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
@@ -27,15 +29,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_top_books"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
                     style="@style/TabLayout"
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
 
             </LinearLayout>
 
@@ -48,5 +50,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_plus"
+        tools:ignore="ContentDescription" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
