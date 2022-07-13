@@ -12,4 +12,8 @@ class BooksDataSourceImpl @Inject constructor(
     override suspend fun getBooksList(): List<BookItemModel> {
         return mapper(service.getBooks())
     }
+
+    override suspend fun getBooksByStatus(status: Int): List<BookItemModel> {
+        return mapper(service.getBooksByStatus(status))
+    }
 }

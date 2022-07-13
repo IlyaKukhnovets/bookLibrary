@@ -30,8 +30,8 @@ class BooksFragmentContainer @Inject constructor(private val factory: ViewModelP
 
     private fun initView() {
         val fragments = listOf(
-            MyBooksFragment::class to Bundle(),
-            MyFavouriteBooksFragment::class to Bundle()
+            MyBooksFragment::class to Bundle.EMPTY,
+            MyFavouriteBooksFragment::class to Bundle.EMPTY
         )
         val titles = listOf(
             "Книги", "Избранное"

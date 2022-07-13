@@ -29,6 +29,8 @@ android {
         viewBinding true
     }
 
+    kotlinOptions.jvmTarget = "1.8"
+
 }
 
 dependencies {
@@ -78,5 +80,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
+
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
 }
