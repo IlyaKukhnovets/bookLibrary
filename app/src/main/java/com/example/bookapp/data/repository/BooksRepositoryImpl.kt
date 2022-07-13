@@ -16,4 +16,10 @@ class BooksRepositoryImpl @Inject constructor(
             booksDataSource.getBooksList()
         }
     }
+
+    override suspend fun getBooksByStatus(status: Int): List<BookItemModel> {
+        return withContext(ioDispatcher) {
+            booksDataSource.getBooksByStatus(status)
+        }
+    }
 }

@@ -2,11 +2,12 @@ package com.example.bookapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityMainBinding
-import com.example.bookapp.presentation.ui.home.MainBooksFragmentContainer
+import com.example.bookapp.presentation.ui.home.BooksFragmentContainer
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         AndroidInjection.inject(this)
         supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) TODO: разблокировать когда будут готовы темы
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         initView()
     }
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fc_fragment_container, MainBooksFragmentContainer(factory)).commit()
+            .replace(R.id.fc_fragment_container, BooksFragmentContainer(factory)).commit()
     }
 
     override fun androidInjector(): DispatchingAndroidInjector<Any>? {

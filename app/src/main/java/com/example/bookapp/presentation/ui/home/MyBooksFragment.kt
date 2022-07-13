@@ -2,9 +2,6 @@ package com.example.bookapp.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bookapp.R
@@ -12,7 +9,7 @@ import com.example.bookapp.databinding.FragmentBooksBinding
 import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.injectViewModel
-import com.example.bookapp.presentation.viewstate.BookItemTopViewState
+import com.example.bookapp.presentation.viewstate.BookItemViewState
 import javax.inject.Inject
 
 class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider.Factory) :
@@ -21,7 +18,10 @@ class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider
     private val binding by viewBinding(FragmentBooksBinding::bind)
 
     private val viewModel by lazy { injectViewModel<MyBooksViewModel>(factory) }
-    private val adapter = BaseRecyclerViewAdapter(mapper = ::mapViewState)
+    private val adapter = BaseRecyclerViewAdapter(
+        mapper = ::mapViewState,
+        onItemClickListener = ::onItemClick
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,5 +43,9 @@ class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider
         }
     }
 
-    private fun mapViewState(viewState: BookItemTopViewState) = BookItem(viewState)
+    private fun mapViewState(viewState: BookItemViewState) = BookItem(viewState)
+
+    private fun onItemClick(item: BookItemViewState, view: View, position: Int) {
+
+    }
 }

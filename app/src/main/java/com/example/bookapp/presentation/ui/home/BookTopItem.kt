@@ -7,10 +7,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ItemBookTopBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
-import com.example.bookapp.presentation.viewstate.BookItemTopViewState
+import com.example.bookapp.presentation.viewstate.BookItemViewState
 
-class BookTopItem(override val viewState: BookItemTopViewState) :
-    BaseRecyclerItem<ItemBookTopBinding, BookItemTopViewState> {
+class BookTopItem(override val viewState: BookItemViewState) :
+    BaseRecyclerItem<ItemBookTopBinding, BookItemViewState> {
+
     override fun getViewId(): Int = R.layout.item_book_top
 
     override fun getBindingInflater(): (layoutInflater: LayoutInflater, parent: ViewGroup, attachToRoot: Boolean) -> ItemBookTopBinding {
@@ -20,7 +21,6 @@ class BookTopItem(override val viewState: BookItemTopViewState) :
     override fun renderView(binding: ItemBookTopBinding, positionInAdapter: Int) {
         Glide.with(binding.root)
             .load(viewState.image)
-            .transform(RoundedCorners(8))
             .into(binding.ivBookImage)
     }
 }

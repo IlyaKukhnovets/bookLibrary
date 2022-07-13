@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import kotlin.reflect.KFunction0
 
 class BaseRecyclerViewAdapter<VS : Any>(
     private val mapper: (VS) -> BaseRecyclerItem<out ViewBinding, VS>,

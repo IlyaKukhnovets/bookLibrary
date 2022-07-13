@@ -14,13 +14,13 @@ interface BooksModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(MyBooksFragment::class)
-    fun bindBooksFragment(fragment: MyBooksFragment): Fragment
+    @FragmentKey(BooksFragmentContainer::class)
+    fun bindBooksContainerFragment(fragment: BooksFragmentContainer): Fragment
 
     @Binds
     @IntoMap
-    @FragmentKey(MainBooksFragmentContainer::class)
-    fun bindMainBooksContainerFragment(fragment: MainBooksFragmentContainer): Fragment
+    @FragmentKey(MyBooksFragment::class)
+    fun bindBooksFragment(fragment: MyBooksFragment): Fragment
 
     @Binds
     @IntoMap
@@ -30,11 +30,16 @@ interface BooksModule {
     @Binds
     @IntoMap
     @ViewModelKey(MyBooksViewModel::class)
-    fun bindMyBooksViewModel(viewModel: MyBooksViewModel): ViewModel
+    fun bindBooksViewModel(viewModel: MyBooksViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(MyBooksTopViewModel::class)
-    fun bindMyBooksTopViewModel(viewModel: MyBooksTopViewModel): ViewModel
+    @ViewModelKey(BooksContainerViewModel::class)
+    fun bindBooksTopViewModel(viewModel: BooksContainerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyFavouriteBooksViewModel::class)
+    fun bindFavouriteBooksViewModel(viewModel: MyFavouriteBooksViewModel): ViewModel
 
 }
