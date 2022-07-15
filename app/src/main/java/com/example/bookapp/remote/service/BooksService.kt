@@ -18,4 +18,9 @@ interface BooksService {
     suspend fun getBooksByStatus(
         @Query("where=status") status: Int
     ): List<BooksResponse>
+
+    @GET("SERVICE_PREFIX?")
+    suspend fun getBookById(
+        @Query("where=status") bookId: Int
+    ): List<BooksResponse>
 }
