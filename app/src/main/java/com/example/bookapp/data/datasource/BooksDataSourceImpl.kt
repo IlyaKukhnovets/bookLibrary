@@ -18,6 +18,6 @@ class BooksDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getBookById(bookId: Int): List<BookItemModel> {
-        return mapper(service.getBookById(bookId))
+        return mapper(service.getBookById("bookId=$bookId"))
     }
 }

@@ -1,5 +1,7 @@
 package com.example.bookapp.di.data
 
+import com.example.bookapp.data.datasource.AuthorsDataSource
+import com.example.bookapp.data.datasource.AuthorsDataSourceImpl
 import com.example.bookapp.data.datasource.BooksDataSource
 import com.example.bookapp.data.datasource.BooksDataSourceImpl
 import dagger.Binds
@@ -13,6 +15,9 @@ interface DataModule {
 
     @Binds
     fun bindsBooksDataSource(dataSource: BooksDataSourceImpl): BooksDataSource
+
+    @Binds
+    fun bindsAuthorsDataSource(dataSource: AuthorsDataSourceImpl): AuthorsDataSource
 
     @Module
     object ProvidesModule {

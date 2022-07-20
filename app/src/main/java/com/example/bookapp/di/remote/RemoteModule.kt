@@ -3,6 +3,7 @@ package com.example.bookapp.di.remote
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.bookapp.remote.moshi.MoshiProvider
+import com.example.bookapp.remote.service.AuthorsService
 import com.example.bookapp.remote.service.BooksService
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -58,5 +59,10 @@ object RemoteModule {
     @Provides
     fun providesBooksService(retrofit: Retrofit): BooksService {
         return retrofit.create(BooksService::class.java)
+    }
+
+    @Provides
+    fun providesAuthorsService(retrofit: Retrofit): AuthorsService {
+        return retrofit.create(AuthorsService::class.java)
     }
 }

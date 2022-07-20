@@ -5,25 +5,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_book_name"
-        style="@style/Base.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Граф Монте-Кристо" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/book_author_title"
-        style="@style/Base.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Автор:" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/yellow_light" />
 
-    <TextView
-        android:id="@+id/book_author"
-        style="@style/Base.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Александр Дюма" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_book_name"
+                style="@style/Base.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Граф Монте-Кристо" />
+
+            <TextView
+                android:id="@+id/book_author_title"
+                style="@style/Base.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Автор:" />
+
+            <TextView
+                android:id="@+id/book_author"
+                style="@style/Base.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Александр Дюма" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="32dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

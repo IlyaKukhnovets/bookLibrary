@@ -21,6 +21,6 @@ interface BooksService {
 
     @GET("$SERVICE_PREFIX?")
     suspend fun getBookById(
-        @Query("where=status") bookId: Int
+        @Query("where") bookId: String
     ): List<BooksResponse>
 }
