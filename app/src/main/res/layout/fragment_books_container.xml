@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_page"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -29,6 +30,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_top_books"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="16dp"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.tabs.TabLayout
