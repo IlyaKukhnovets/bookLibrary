@@ -11,6 +11,7 @@ import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
+import com.example.bookapp.presentation.viewstate.AuthorItemViewState
 import com.example.bookapp.presentation.viewstate.BookItemViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
@@ -50,11 +51,11 @@ class BooksFragmentContainer @Inject constructor(private val factory: ViewModelP
     }
 
     private fun initViewModel() {
-        viewModel.booksLiveData.observe(viewLifecycleOwner) {
+        viewModel.authorsLiveData.observe(viewLifecycleOwner) {
             adapter.replaceElementsWithDiffUtil(it)
         }
     }
 
-    private fun mapItem(viewState: BookItemViewState) = BookTopItem(viewState)
+    private fun mapItem(viewState: AuthorItemViewState) = BookTopItem(viewState)
 
 }

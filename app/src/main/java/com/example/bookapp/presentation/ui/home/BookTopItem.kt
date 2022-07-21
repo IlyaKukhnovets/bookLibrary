@@ -3,14 +3,13 @@ package com.example.bookapp.presentation.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ItemBookTopBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
-import com.example.bookapp.presentation.viewstate.BookItemViewState
+import com.example.bookapp.presentation.viewstate.AuthorItemViewState
 
-class BookTopItem(override val viewState: BookItemViewState) :
-    BaseRecyclerItem<ItemBookTopBinding, BookItemViewState> {
+class BookTopItem(override val viewState: AuthorItemViewState) :
+    BaseRecyclerItem<ItemBookTopBinding, AuthorItemViewState> {
 
     override fun getViewId(): Int = R.layout.item_book_top
 
@@ -21,6 +20,7 @@ class BookTopItem(override val viewState: BookItemViewState) :
     override fun renderView(binding: ItemBookTopBinding, positionInAdapter: Int) {
         Glide.with(binding.root)
             .load(viewState.image)
-            .into(binding.ivBookImage)
+            .into(binding.ivAuthorImage)
+        binding.author.text = viewState.name
     }
 }

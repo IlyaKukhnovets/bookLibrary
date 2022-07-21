@@ -4,8 +4,9 @@
     android:id="@+id/ll_book_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:orientation="horizontal">
+    android:background="@color/background_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/iv_book_image"
@@ -21,19 +22,19 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/SubHeader.Bold.Primary"
-            tools:text="Мартин Иден"
             android:id="@+id/tv_book_name"
+            style="@style/SubHeader.Bold.Primary"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:text="Мартин Иден" />
 
         <TextView
-            style="@style/Base.Secondary"
-            android:layout_marginTop="8dp"
-            tools:text="Джек Лондон"
             android:id="@+id/tv_book_author"
+            style="@style/Base.Secondary"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Джек Лондон" />
 
     </LinearLayout>
 

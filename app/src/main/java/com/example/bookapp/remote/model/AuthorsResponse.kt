@@ -4,15 +4,13 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class BooksResponse(
+data class AuthorsResponse(
     @Json(name = "id")
     val id: Int,
-    @Json(name = "name")
-    val name: String,
-    @Json(name = "author")
-    val author: String,
     @Json(name = "src")
     val src: String?,
-    @Json(name = "status")
-    val status: Int
+    @Json(name = "name")
+    val name: String,
+    @Json(name = "biography")
+    val biography: String?
 )

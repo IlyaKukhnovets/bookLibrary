@@ -9,6 +9,7 @@ import com.example.bookapp.databinding.FragmentBooksBinding
 import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.injectViewModel
+import com.example.bookapp.presentation.ui.book.BookPreviewFragment
 import com.example.bookapp.presentation.viewstate.BookItemViewState
 import javax.inject.Inject
 
@@ -46,6 +47,6 @@ class MyBooksFragment @Inject constructor(private val factory: ViewModelProvider
     private fun mapViewState(viewState: BookItemViewState) = BookItem(viewState)
 
     private fun onItemClick(item: BookItemViewState, view: View, position: Int) {
-
+        replaceFragment(BookPreviewFragment::class, BookPreviewFragment.getArgs(item.id))
     }
 }

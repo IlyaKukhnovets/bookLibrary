@@ -1,6 +1,7 @@
 package com.example.bookapp.presentation.viewstate
 
 data class BookItemViewState(
+    val id: Int,
     val name: String,
     val author: String,
     val image: String?,

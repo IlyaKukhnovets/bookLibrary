@@ -14,9 +14,34 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
+    <!--Header style-->
+    <style name="Header">
+        <item name="android:textSize">@dimen/font_size_20_24</item>
+    </style>
+
+    <style name="Header.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Header.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Header.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Header.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Header.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
     <!--SubHeader style-->
     <style name="SubHeader">
-        <item name="android:textSize">@dimen/font_size_20_24</item>
+        <item name="android:textSize">@dimen/font_size_16_20</item>
     </style>
 
     <style name="SubHeader.Bold">
