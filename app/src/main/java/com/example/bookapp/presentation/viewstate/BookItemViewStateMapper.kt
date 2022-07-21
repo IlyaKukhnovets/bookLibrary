@@ -8,6 +8,7 @@ class BookItemViewStateMapper @Inject constructor() :
     override fun invoke(entity: List<BookItemModel>): List<BookItemViewState> {
         return entity.map { book ->
             BookItemViewState(
+                id = book.id,
                 name = book.name,
                 author = book.author,
                 image = book.image,

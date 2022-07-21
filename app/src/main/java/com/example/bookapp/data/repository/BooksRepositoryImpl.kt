@@ -3,6 +3,7 @@ package com.example.bookapp.data.repository
 import com.example.bookapp.data.datasource.BooksDataSource
 import com.example.bookapp.data.model.BookAuthorItemModel
 import com.example.bookapp.data.model.BookItemModel
+import com.example.bookapp.data.model.BookPreviewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,7 +25,7 @@ class BooksRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookById(bookId: Int): List<BookItemModel> {
+    override suspend fun getBookById(bookId: Int): BookPreviewModel {
         return withContext(ioDispatcher){
             booksDataSource.getBookById(bookId)
         }

@@ -1,55 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/background_page">
 
-    <FrameLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/yellow_light" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/iv_background_top"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/yellow_light"
+        tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/tv_book_name"
-                style="@style/Base.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Граф Монте-Кристо" />
+    <TextView
+        android:id="@+id/tv_book_name"
+        style="@style/Header.Bold.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Граф Монте-Кристо" />
 
-            <TextView
-                android:id="@+id/book_author_title"
-                style="@style/Base.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Автор:" />
+    <TextView
+        android:id="@+id/book_author_title"
+        style="@style/Base.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/tv_book_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
+        tools:text="Автор:" />
 
-            <TextView
-                android:id="@+id/book_author"
-                style="@style/Base.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Александр Дюма" />
+    <TextView
+        android:id="@+id/tv_book_author"
+        style="@style/SubHeader.Bold.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/book_author_title"
+        app:layout_constraintTop_toBottomOf="@+id/book_author_title"
+        tools:text="Александр Дюма" />
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="32dp" />
+    <ImageView
+        android:id="@+id/iv_book_image"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rounded_corners_8dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_author"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_author"
+        tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@+id/tv_book_pages_count"
+        style="@style/Base.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
+        app:layout_constraintTop_toBottomOf="@+id/iv_background_top"
+        tools:text="999 стр." />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/tv_book_status"
+        style="@style/Base.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rounded_corners_8dp_yellow"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_book_pages_count"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_pages_count"
+        tools:text="Прочитал" />
 
-    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_book_description"
+        style="@style/Base.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_book_image"
+        tools:text="Описание книги" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.bookapp.remote.service
 
+import com.example.bookapp.remote.model.BookPreviewResponse
 import com.example.bookapp.remote.model.BooksResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -22,5 +23,5 @@ interface BooksService {
     @GET("$SERVICE_PREFIX?")
     suspend fun getBookById(
         @Query("where") bookId: String
-    ): List<BooksResponse>
+    ): BookPreviewResponse
 }

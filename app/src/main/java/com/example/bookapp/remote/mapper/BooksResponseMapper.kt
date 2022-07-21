@@ -9,6 +9,7 @@ class BooksResponseMapper @Inject constructor() : Mapper<List<BooksResponse>, Li
     override fun invoke(response: List<BooksResponse>): List<BookItemModel> {
         return response.map { book ->
             BookItemModel(
+                id = book.id,
                 name = book.name,
                 author = book.author,
                 image = book.src,
