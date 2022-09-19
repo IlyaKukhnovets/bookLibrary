@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface BooksService {
 
     companion object {
-        private const val SERVICE_PREFIX = "Book"
+        private const val SERVICE_PREFIX = "Books"
     }
 
     @GET(SERVICE_PREFIX)
