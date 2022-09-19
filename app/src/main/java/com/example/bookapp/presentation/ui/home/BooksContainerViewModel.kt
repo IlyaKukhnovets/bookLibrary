@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookapp.data.model.BookAuthorItemModel
 import com.example.bookapp.data.repository.AuthorsRepository
-import com.example.bookapp.data.repository.BooksRepository
 import com.example.bookapp.presentation.viewstate.AuthorItemViewState
 import com.example.bookapp.presentation.viewstate.AuthorItemViewStateMapper
-import com.example.bookapp.presentation.viewstate.BookItemViewState
-import com.example.bookapp.presentation.viewstate.BookItemViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

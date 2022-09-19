@@ -13,7 +13,6 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.viewstate.AuthorItemViewState
-import com.example.bookapp.presentation.viewstate.BookItemViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 

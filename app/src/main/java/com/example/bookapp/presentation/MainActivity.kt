@@ -18,16 +18,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var androidInjector: DispatchingAndroidInjector<Any>? = null
         @Inject set
 
-    @Inject
-    lateinit var fragmentFactory: FragmentFactory
-
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
+//    @Inject
+//    lateinit var fragmentFactory: FragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        supportFragmentManager.fragmentFactory = fragmentFactory
+//        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         initView()
@@ -36,8 +32,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private fun initView() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fc_fragment_container, BooksFragmentContainer(factory)).commit()
     }
 
     override fun androidInjector(): DispatchingAndroidInjector<Any>? {

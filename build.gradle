@@ -43,6 +43,9 @@ buildscript {
         junit_version = '4.13.2'
         espresso_version = '3.4.0'
 
+        //Navigation
+        nav_version = '2.5.1'
+
         timber_version = '5.0.1'
 
     }
@@ -53,7 +56,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
     }
 }
 
