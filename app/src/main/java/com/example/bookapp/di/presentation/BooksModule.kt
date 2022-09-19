@@ -9,30 +9,23 @@ import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
 import com.example.bookapp.presentation.ui.home.*
 import dagger.Binds
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
 interface BooksModule {
 
-    @Binds
-    @IntoMap
-    @FragmentKey(BooksFragmentContainer::class)
-    fun bindBooksContainerFragment(fragment: BooksFragmentContainer): Fragment
+    @ContributesAndroidInjector
+    fun bindBooksContainerFragment(): BooksFragmentContainer
 
-    @Binds
-    @IntoMap
-    @FragmentKey(MyBooksFragment::class)
-    fun bindBooksFragment(fragment: MyBooksFragment): Fragment
+    @ContributesAndroidInjector
+    fun bindBooksFragment(): MyBooksFragment
 
-    @Binds
-    @IntoMap
-    @FragmentKey(MyFavouriteBooksFragment::class)
-    fun bindFavouriteBooksFragment(fragment: MyFavouriteBooksFragment): Fragment
+    @ContributesAndroidInjector
+    fun bindFavouriteBooksFragment(): MyFavouriteBooksFragment
 
-    @Binds
-    @IntoMap
-    @FragmentKey(BookPreviewFragment::class)
-    fun bindBookPreviewFragment(fragment: BookPreviewFragment): Fragment
+    @ContributesAndroidInjector
+    fun bindBookPreviewFragment(): BookPreviewFragment
 
     @Binds
     @IntoMap
