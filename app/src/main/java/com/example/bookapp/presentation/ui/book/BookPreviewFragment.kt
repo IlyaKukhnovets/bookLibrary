@@ -1,19 +1,22 @@
 package com.example.bookapp.presentation.ui.book
 
+import android.graphics.BlurMaskFilter
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.example.bookapp.R
 import com.example.bookapp.data.state.LoadingResult
 import com.example.bookapp.databinding.FragmentBookPreviewBinding
 import com.example.bookapp.di.Injectable
 import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.viewstate.BookPreviewViewState
+import jp.wasabeef.glide.transformations.BlurTransformation
 import javax.inject.Inject
 
-class BookPreviewFragment : BaseFragment(), Injectable {
+class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Injectable {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -45,13 +48,20 @@ class BookPreviewFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun initView(vs: BookPreviewViewState) {
-        Glide.with(binding.root).load(vs.image).into(binding.ivBackgroundTop)
-        Glide.with(binding.root).load(vs.image).into(binding.ivBookImage)
-        binding.tvBookName.text = vs.bookName
-        binding.tvBookAuthor.text = vs.author
-        binding.tvBookDescription.text = vs.bookDescription
-        binding.tvBookPagesCount.text = vs.pagesCount.toString()
+    private fun initView(it: List<BookPreviewViewState>) {
+        it.map { viewState ->
+            Glide.with(binding.root)
+                .load(viewState.image)
+                .transform(BlurTransformation(25))
+                .into(binding.ivBackgroundTop)
+            Glide.with(binding.root).load(viewState.image).into(binding.ivBookImage)
+
+            binding.tvBookName.text = viewState.bookName
+            binding.tvBookAuthor.text = viewState.author
+            binding.tvBookDescription.text = viewState.bookDescription
+            binding.tvBookPagesCount.text = viewState.pagesCount.toString()
+        }
+
     }
 
 }

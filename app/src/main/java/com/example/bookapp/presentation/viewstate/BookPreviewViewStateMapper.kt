@@ -4,16 +4,18 @@ import com.example.bookapp.data.model.BookPreviewModel
 import javax.inject.Inject
 
 class BookPreviewViewStateMapper @Inject constructor() :
-    Mapper<BookPreviewModel, BookPreviewViewState> {
-    override fun invoke(entity: BookPreviewModel): BookPreviewViewState {
-        return BookPreviewViewState(
-            bookName = entity.name,
-            author = entity.author,
-            image = entity.image,
-            pagesCount = entity.pagesCount ?: 0,
-            bookDescription = entity.bookDescription,
-            status = mapBookStatus(entity.status)
-        )
+    Mapper<List<BookPreviewModel>, List<BookPreviewViewState>> {
+    override fun invoke(entity: List<BookPreviewModel>): List<BookPreviewViewState> {
+        return entity.map { book ->
+            BookPreviewViewState(
+                bookName = book.name,
+                author = book.author,
+                image = book.image,
+                pagesCount = book.pagesCount ?: 0,
+                bookDescription = book.bookDescription,
+                status = mapBookStatus(book.status)
+            )
+        }
     }
 
     private fun mapBookStatus(status: Int): BookStatus {

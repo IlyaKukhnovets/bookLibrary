@@ -16,8 +16,8 @@ class BookPreviewViewModel @Inject constructor(
     private val viewStateMapper: BookPreviewViewStateMapper
 ) : ViewModel() {
 
-    private val _bookLiveData = MutableLiveData<LoadingResult<BookPreviewViewState>>()
-    val bookLiveData: LiveData<LoadingResult<BookPreviewViewState>> = _bookLiveData
+    private val _bookLiveData = MutableLiveData<LoadingResult<List<BookPreviewViewState>>>()
+    val bookLiveData: LiveData<LoadingResult<List<BookPreviewViewState>>> = _bookLiveData
 
     fun loadBookById(bookId: Int) {
         viewModelScope.launch {

@@ -23,6 +23,7 @@ buildscript {
         //Additional
         dagger_version = '2.42'
         glide_version = '4.13.2'
+        glide_transform_version = '4.3.0'
         paging_version = '3.1.1'
         room_version = '2.4.3'
 

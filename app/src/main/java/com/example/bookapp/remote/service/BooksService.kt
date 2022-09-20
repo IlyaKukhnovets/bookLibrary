@@ -23,5 +23,5 @@ interface BooksService {
     @GET("$SERVICE_PREFIX?")
     suspend fun getBookById(
         @Query("where") bookId: String
-    ): BookPreviewResponse
+    ): List<BookPreviewResponse>
 }
