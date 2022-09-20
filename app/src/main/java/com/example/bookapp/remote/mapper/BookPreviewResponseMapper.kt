@@ -6,15 +6,17 @@ import com.example.bookapp.remote.model.BookPreviewResponse
 import javax.inject.Inject
 
 class BookPreviewResponseMapper @Inject constructor() :
-    Mapper<BookPreviewResponse, BookPreviewModel> {
-    override fun invoke(response: BookPreviewResponse): BookPreviewModel {
-        return BookPreviewModel(
-            name = response.name,
-            author = response.author,
-            image = response.src,
-            pagesCount = response.pages,
-            bookDescription = response.description,
-            status = response.status
-        )
+    Mapper<List<BookPreviewResponse>, List<BookPreviewModel>> {
+    override fun invoke(response: List<BookPreviewResponse>): List<BookPreviewModel> {
+        return response.map { book ->
+            BookPreviewModel(
+                name = book.name,
+                author = book.author,
+                image = book.src,
+                pagesCount = book.pages,
+                bookDescription = book.description,
+                status = book.status
+            )
+        }
     }
 }

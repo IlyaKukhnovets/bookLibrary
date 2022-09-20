@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface BooksService {
 
     companion object {
-        private const val SERVICE_PREFIX = "Books"
+        private const val SERVICE_PREFIX = "Book"
     }
 
     @GET(SERVICE_PREFIX)
@@ -23,5 +23,5 @@ interface BooksService {
     @GET("$SERVICE_PREFIX?")
     suspend fun getBookById(
         @Query("where") bookId: String
-    ): BookPreviewResponse
+    ): List<BookPreviewResponse>
 }
