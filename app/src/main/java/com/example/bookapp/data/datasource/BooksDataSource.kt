@@ -6,5 +6,5 @@ import com.example.bookapp.data.model.BookPreviewModel
 interface BooksDataSource {
     suspend fun getBooksList(): List<BookItemModel>
     suspend fun getBooksByStatus(status: Int): List<BookItemModel>
-    suspend fun getBookById(bookId: Int): BookPreviewModel
+    suspend fun getBookById(bookId: Int): List<BookPreviewModel>
 }

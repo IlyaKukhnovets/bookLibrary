@@ -25,7 +25,7 @@ class BooksRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookById(bookId: Int): BookPreviewModel {
+    override suspend fun getBookById(bookId: Int): List<BookPreviewModel> {
         return withContext(ioDispatcher){
             booksDataSource.getBookById(bookId)
         }
