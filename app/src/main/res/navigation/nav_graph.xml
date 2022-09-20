@@ -9,13 +9,25 @@
         android:id="@+id/splashScreenFragment"
         android:name="com.example.bookapp.presentation.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
+        tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreenFragment_to_booksFragmentContainer"
             app:destination="@id/booksFragmentContainer" />
     </fragment>
+
     <fragment
         android:id="@+id/booksFragmentContainer"
         android:name="com.example.bookapp.presentation.ui.home.BooksFragmentContainer"
-        android:label="BooksFragmentContainer" />
+        android:label="BooksFragmentContainer">
+        <action
+            android:id="@+id/action_booksFragmentContainer_to_bookPreviewFragment"
+            app:destination="@id/bookPreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookPreviewFragment"
+        android:name="com.example.bookapp.presentation.ui.book.BookPreviewFragment"
+        android:label="BookPreviewFragment">
+    </fragment>
+
 </navigation>

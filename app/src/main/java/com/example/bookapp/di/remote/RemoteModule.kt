@@ -17,7 +17,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RemoteModule {
 
     private const val NETWORK_TIMEOUT = 15L
-    private const val REMOTE_PATH = "https://jiggishattack.backendless.app/api/data"
+    private const val REMOTE_PATH = "https://affinedhall.backendless.app/api/data"
 
     @Provides
     fun providesRetrofit(
