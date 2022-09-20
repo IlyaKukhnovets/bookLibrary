@@ -22,9 +22,8 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
     lateinit var factory: ViewModelProvider.Factory
 
     private val binding by viewBinding(FragmentBooksContainerBinding::bind)
-    //    private val viewModel by lazy { injectViewModel<BooksContainerViewModel>(factory) }
+    private val viewModel by lazy { injectViewModel<BooksContainerViewModel>(factory) }
     private val adapter = BaseRecyclerViewAdapter(mapper = ::mapItem)
-    private lateinit var viewModel: BooksContainerViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +53,6 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
     }
 
     private fun initViewModel() {
-        viewModel = injectViewModel(factory)
         viewModel.authorsLiveData.observe(viewLifecycleOwner) {
             adapter.replaceElementsWithDiffUtil(it)
         }
