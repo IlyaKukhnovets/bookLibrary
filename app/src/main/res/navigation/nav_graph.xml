@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_booksFragmentContainer_to_bookPreviewFragment"
             app:destination="@id/bookPreviewFragment" />
+        <action
+            android:id="@+id/action_booksFragmentContainer_to_authorPreviewFragment"
+            app:destination="@id/authorPreviewFragment" />
     </fragment>
 
     <fragment
@@ -29,5 +32,9 @@
         android:name="com.example.bookapp.presentation.ui.book.BookPreviewFragment"
         android:label="BookPreviewFragment">
     </fragment>
+    <fragment
+        android:id="@+id/authorPreviewFragment"
+        android:name="com.example.bookapp.presentation.ui.author.AuthorPreviewFragment"
+        android:label="AuthorPreviewFragment" />
 
 </navigation>

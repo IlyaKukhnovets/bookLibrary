@@ -27,6 +27,7 @@ class MyFavouriteBooksViewModel @Inject constructor(
     fun refreshBooks() {
         viewModelScope.launch {
             try {
+                _favouriteBooksLiveData.postValue(LoadingResult.Loading)
                 _favouriteBooksLiveData.postValue(LoadingResult.Success(
                     mapper(booksRepository.getBooksByStatus(BookStatus.FAVOURITE.status)))
                 )

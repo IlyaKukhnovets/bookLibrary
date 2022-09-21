@@ -16,4 +16,10 @@ class AuthorsRepositoryImpl @Inject constructor(
             authorsDataSource.getBookAuthors()
         }
     }
+
+    override suspend fun getBookAuthor(id: Int): List<BookAuthorItemModel> {
+        return withContext(ioDispatcher) {
+            authorsDataSource.getBookAuthor(id)
+        }
+    }
 }
