@@ -1,4 +1,4 @@
-package com.example.bookapp.presentation.ui.home
+package com.example.bookapp.presentation.ui.author
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,26 +11,26 @@ import com.example.bookapp.presentation.viewstate.AuthorItemViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BooksContainerViewModel @Inject constructor(
+class AuthorPreviewViewModel @Inject constructor(
     private val authorsRepository: AuthorsRepository,
     private val viewStateMapper: AuthorItemViewStateMapper
 ) : ViewModel() {
 
-    private val _authorsLiveData = MutableLiveData<LoadingResult<List<AuthorItemViewState>>>()
-    val authorsLiveData: LiveData<LoadingResult<List<AuthorItemViewState>>> = _authorsLiveData
+    private val _authorLiveData = MutableLiveData<LoadingResult<List<AuthorItemViewState>>>()
+    val authorLiveData: LiveData<LoadingResult<List<AuthorItemViewState>>> = _authorLiveData
 
-    init {
+    fun loadAuthor(authorId: Int) {
         viewModelScope.launch {
-            _authorsLiveData.postValue(LoadingResult.Loading)
             try {
-                _authorsLiveData.postValue(
-                    LoadingResult.Success(viewStateMapper(authorsRepository.getBookAuthors()))
+                _authorLiveData.postValue(LoadingResult.Loading)
+                _authorLiveData.postValue(
+                    LoadingResult.Success(
+                        viewStateMapper(authorsRepository.getBookAuthor(authorId))
+                    )
                 )
             } catch (e: Exception) {
-                _authorsLiveData.postValue(LoadingResult.Error(e))
+                _authorLiveData.postValue(LoadingResult.Error(e))
             }
-
         }
     }
-
 }

@@ -3,7 +3,7 @@
 
     <!--Title style-->
     <style name="Title">
-        <item name="android:textSize">@dimen/font_size_30_32</item>
+        <item name="android:textSize">@dimen/font_size_24_30</item>
     </style>
 
     <style name="Title.Bold">

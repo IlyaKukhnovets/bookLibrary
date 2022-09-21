@@ -9,6 +9,7 @@ import dagger.Module
 @Module(
     includes = [
         BooksModule::class,
+        AuthorModule::class,
         MainActivityModule::class,
     ]
 )

@@ -13,4 +13,8 @@ class AuthorsDataSourceImpl @Inject constructor(
     override suspend fun getBookAuthors(): List<BookAuthorItemModel> {
         return mapper(service.getBookAuthors())
     }
+
+    override suspend fun getBookAuthor(id: Int): List<BookAuthorItemModel> {
+        return mapper(service.getBookAuthor("id=$id"))
+    }
 }

@@ -2,10 +2,13 @@ package com.example.bookapp.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bookapp.R
+import com.example.bookapp.data.state.LoadingResult
 import com.example.bookapp.databinding.FragmentBooksContainerBinding
 import com.example.bookapp.di.Injectable
 import com.example.bookapp.presentation.base.BaseFragment
@@ -23,7 +26,10 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
 
     private val binding by viewBinding(FragmentBooksContainerBinding::bind)
     private val viewModel by lazy { injectViewModel<BooksContainerViewModel>(factory) }
-    private val adapter = BaseRecyclerViewAdapter(mapper = ::mapItem)
+    private val adapter = BaseRecyclerViewAdapter(
+        mapper = ::mapItem,
+        onItemClickListener = ::itemListener
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,10 +60,26 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
 
     private fun initViewModel() {
         viewModel.authorsLiveData.observe(viewLifecycleOwner) {
-            adapter.replaceElementsWithDiffUtil(it)
+            when (it) {
+                is LoadingResult.Loading -> {}
+                is LoadingResult.Success -> {
+                    adapter.replaceElementsWithDiffUtil(it.data)
+                }
+                is LoadingResult.Error -> {}
+            }
         }
     }
 
     private fun mapItem(viewState: AuthorItemViewState) = BookTopItem(viewState)
+
+    private fun itemListener(item: AuthorItemViewState, view: View, position: Int) {
+        val bundle = bundleOf(
+            "KEY_AUTHOR_ID" to item.id
+        )
+        findNavController().navigate(
+            R.id.action_booksFragmentContainer_to_authorPreviewFragment,
+            bundle
+        )
+    }
 
 }
