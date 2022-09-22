@@ -1,7 +1,8 @@
 package com.example.bookapp.data.repository
 
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.bookapp.data.datasource.BooksDataSource
-import com.example.bookapp.data.model.BookAuthorItemModel
 import com.example.bookapp.data.model.BookItemModel
 import com.example.bookapp.data.model.BookPreviewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,20 +14,32 @@ class BooksRepositoryImpl @Inject constructor(
     private val booksDataSource: BooksDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BooksRepository {
-    override suspend fun getBooksList(): List<BookItemModel> {
-        return withContext(ioDispatcher) {
-            booksDataSource.getBooksList()
-        }
-    }
 
-    override suspend fun getBooksByStatus(status: Int): List<BookItemModel> {
-        return withContext(ioDispatcher) {
-            booksDataSource.getBooksByStatus(status)
+    override fun getBooksList(status: Int?): PagingSource<Int, BookItemModel> =
+        object : PagingSource<Int, BookItemModel>() {
+            override fun getRefreshKey(state: PagingState<Int, BookItemModel>): Int? {
+                return null
+            }
+
+            override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BookItemModel> {
+                return try {
+                    val offset = params.key ?: 0
+                    val limit = params.loadSize
+                    val data = booksDataSource.getBooksList(limit, offset, status)
+                    return LoadResult.Page(
+                        data = data,
+                        prevKey = null,
+                        nextKey = if (data.size == limit) offset + data.size else null
+                    )
+                } catch (e: Exception) {
+                    LoadResult.Error(e)
+                }
+            }
+
         }
-    }
 
     override suspend fun getBookById(bookId: Int): List<BookPreviewModel> {
-        return withContext(ioDispatcher){
+        return withContext(ioDispatcher) {
             booksDataSource.getBookById(bookId)
         }
     }

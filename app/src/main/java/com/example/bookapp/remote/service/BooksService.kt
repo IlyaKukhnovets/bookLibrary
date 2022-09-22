@@ -3,7 +3,6 @@ package com.example.bookapp.remote.service
 import com.example.bookapp.remote.model.BookPreviewResponse
 import com.example.bookapp.remote.model.BooksResponse
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BooksService {
@@ -13,10 +12,9 @@ interface BooksService {
     }
 
     @GET(SERVICE_PREFIX)
-    suspend fun getBooks(): List<BooksResponse>
-
-    @GET(SERVICE_PREFIX)
-    suspend fun getBooksByStatus(
+    suspend fun getBooks(
+        @Query("pageSize") limit: String,
+        @Query("offset") offset: String,
         @Query("where") status: String
     ): List<BooksResponse>
 
