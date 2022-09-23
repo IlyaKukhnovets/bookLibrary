@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.data.repository.AuthorsRepository
 import com.example.bookapp.data.state.LoadingResult
-import com.example.bookapp.presentation.viewstate.AuthorItemViewState
-import com.example.bookapp.presentation.viewstate.AuthorItemViewStateMapper
+import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
+import com.example.bookapp.presentation.viewstate.home.AuthorItemViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class BooksContainerViewModel @Inject constructor(
             _authorsLiveData.postValue(LoadingResult.Loading)
             try {
                 _authorsLiveData.postValue(
-                    LoadingResult.Success(viewStateMapper(authorsRepository.getBookAuthors()))
+                    LoadingResult.Success(viewStateMapper.mapAuthors(authorsRepository.getBookAuthors()))
                 )
             } catch (e: Exception) {
                 _authorsLiveData.postValue(LoadingResult.Error(e))

@@ -1,4 +1,4 @@
-package com.example.bookapp.data.model
+package com.example.bookapp.data.model.book
 
 data class BookPreviewModel(
     val name: String,
@@ -6,5 +6,8 @@ data class BookPreviewModel(
     val image: String?,
     val pagesCount: Int?,
     val bookDescription: String?,
-    val status: Int
+    val status: Int,
+    val genre: String,
+    val seriesOrder: Int?,
+    val series: String?
 )

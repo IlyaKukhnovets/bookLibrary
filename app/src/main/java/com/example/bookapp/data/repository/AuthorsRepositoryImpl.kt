@@ -1,7 +1,8 @@
 package com.example.bookapp.data.repository
 
 import com.example.bookapp.data.datasource.AuthorsDataSource
-import com.example.bookapp.data.model.BookAuthorItemModel
+import com.example.bookapp.data.model.author.AuthorRelativeModel
+import com.example.bookapp.data.model.book.BookAuthorItemModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,9 +18,15 @@ class AuthorsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBookAuthor(id: Int): List<BookAuthorItemModel> {
+    override suspend fun getBookAuthor(id: String): BookAuthorItemModel {
         return withContext(ioDispatcher) {
             authorsDataSource.getBookAuthor(id)
+        }
+    }
+
+    override suspend fun getAuthorsRelative(genre: String, id: Int): List<AuthorRelativeModel> {
+        return withContext(ioDispatcher) {
+            authorsDataSource.getAuthorsRelative(genre, id)
         }
     }
 }

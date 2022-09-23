@@ -16,5 +16,11 @@ data class BookPreviewResponse(
     @Json(name = "description")
     val description: String?,
     @Json(name = "status")
-    val status: Int
+    val status: Int,
+    @Json(name = "series")
+    val series: String?,
+    @Json(name = "genre")
+    val genre: String,
+    @Json(name = "series_order")
+    val seriesOrder: Int?,
 )

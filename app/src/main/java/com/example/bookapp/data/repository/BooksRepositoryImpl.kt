@@ -3,8 +3,9 @@ package com.example.bookapp.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bookapp.data.datasource.BooksDataSource
-import com.example.bookapp.data.model.BookItemModel
-import com.example.bookapp.data.model.BookPreviewModel
+import com.example.bookapp.data.model.book.BookItemModel
+import com.example.bookapp.data.model.book.BookPreviewModel
+import com.example.bookapp.data.model.book.BooksSeriesModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -38,9 +39,15 @@ class BooksRepositoryImpl @Inject constructor(
 
         }
 
-    override suspend fun getBookById(bookId: Int): List<BookPreviewModel> {
+    override suspend fun getBookById(bookId: String): BookPreviewModel {
         return withContext(ioDispatcher) {
             booksDataSource.getBookById(bookId)
+        }
+    }
+
+    override suspend fun getBookSeries(series: String): List<BooksSeriesModel> {
+        return withContext(ioDispatcher) {
+            booksDataSource.getBookSeries(series)
         }
     }
 }

@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ItemBookTopBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
-import com.example.bookapp.presentation.viewstate.AuthorItemViewState
+import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 
 class BookTopItem(override val viewState: AuthorItemViewState) :
     BaseRecyclerItem<ItemBookTopBinding, AuthorItemViewState> {

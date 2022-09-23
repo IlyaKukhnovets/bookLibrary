@@ -12,5 +12,9 @@ data class AuthorsResponse(
     @Json(name = "name")
     val name: String,
     @Json(name = "biography")
-    val biography: String?
+    val biography: String?,
+    @Json(name = "genre")
+    val genre: String,
+    @Json(name = "objectId")
+    val objectId: String
 )

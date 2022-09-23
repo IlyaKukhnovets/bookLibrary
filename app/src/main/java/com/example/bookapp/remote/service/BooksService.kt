@@ -2,7 +2,9 @@ package com.example.bookapp.remote.service
 
 import com.example.bookapp.remote.model.BookPreviewResponse
 import com.example.bookapp.remote.model.BooksResponse
+import com.example.bookapp.remote.model.BooksSeriesResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BooksService {
@@ -18,8 +20,13 @@ interface BooksService {
         @Query("where") status: String
     ): List<BooksResponse>
 
-    @GET("$SERVICE_PREFIX?")
+    @GET("$SERVICE_PREFIX/{objectId}")
     suspend fun getBookById(
-        @Query("where") bookId: String
-    ): List<BookPreviewResponse>
+        @Path("objectId") objectId: String
+    ): BookPreviewResponse
+
+    @GET("$SERVICE_PREFIX?")
+    suspend fun getBookSeries(
+        @Query("where") series: String
+    ): List<BooksSeriesResponse>
 }

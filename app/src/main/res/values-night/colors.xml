@@ -2,4 +2,5 @@
 <resources>
     <color name="text_primary">#ffffff</color>
     <color name="background_page">#1C1D26</color>
+    <color name="background_content">#000000</color>
 </resources>
