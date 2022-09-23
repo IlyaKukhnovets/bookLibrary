@@ -25,55 +25,79 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/l_progress"
-                layout="@layout/layout_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="16dp"
-                android:orientation="vertical"
-                tools:ignore="UseCompoundDrawables">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/iv_author_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="16dp"
-                    android:adjustViewBounds="true"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/tv_author_name"
-                    style="@style/Header.Bold"
-                    android:layout_width="match_parent"
+                <include
+                    android:id="@+id/l_progress"
+                    layout="@layout/layout_progress"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/yellow_dark" />
+                    android:layout_gravity="center" />
 
-                <TextView
-                    android:id="@+id/tv_biography"
-                    style="@style/Base.Primary"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iv_author_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="16dp"
+                        android:adjustViewBounds="true"
+                        tools:ignore="ContentDescription" />
 
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/tv_author_name"
+                        style="@style/Header.Bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/yellow_dark" />
 
-    </androidx.core.widget.NestedScrollView>
+                    <TextView
+                        android:id="@+id/tv_biography"
+                        style="@style/Base.Primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_relative_authors_title"
+                        style="@style/SubHeader.Bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/yellow_dark"
+                        android:visibility="gone"
+                        tools:text="Похожие авторы"
+                        tools:visibility="visible" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_authors_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="8dp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

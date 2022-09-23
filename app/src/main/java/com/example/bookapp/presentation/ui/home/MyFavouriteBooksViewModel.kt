@@ -1,15 +1,16 @@
 package com.example.bookapp.presentation.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.bookapp.data.repository.BooksRepository
-import com.example.bookapp.data.state.LoadingResult
-import com.example.bookapp.presentation.viewstate.BookItemViewState
-import com.example.bookapp.presentation.viewstate.BookItemViewStateMapper
-import com.example.bookapp.presentation.viewstate.BookStatus
-import kotlinx.coroutines.launch
+import com.example.bookapp.presentation.viewstate.home.BookItemViewState
+import com.example.bookapp.presentation.viewstate.home.BookItemViewStateMapper
+import com.example.bookapp.presentation.viewstate.home.BookStatus
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MyFavouriteBooksViewModel @Inject constructor(
@@ -17,24 +18,23 @@ class MyFavouriteBooksViewModel @Inject constructor(
     private val mapper: BookItemViewStateMapper
 ) : ViewModel() {
 
-    private val _favouriteBooksLiveData = MutableLiveData<LoadingResult<List<BookItemViewState>>>()
-    val favouriteBooksLiveData: LiveData<LoadingResult<List<BookItemViewState>>> = _favouriteBooksLiveData
+    private lateinit var flow: Flow<PagingData<BookItemViewState>>
 
-    init {
-        refreshBooks()
+    fun init() {
+        flow = createFlow()
     }
 
-    fun refreshBooks() {
-        viewModelScope.launch {
-            try {
-                _favouriteBooksLiveData.postValue(LoadingResult.Loading)
-                _favouriteBooksLiveData.postValue(LoadingResult.Success(
-                    mapper(booksRepository.getBooksByStatus(BookStatus.FAVOURITE.status)))
-                )
-            } catch (e: Exception) {
-                _favouriteBooksLiveData.postValue(LoadingResult.Error(e))
-            }
-        }
+    fun getFlow() = flow
+
+    private fun createFlow(): Flow<PagingData<BookItemViewState>> {
+        return Pager(
+            PagingConfig(
+                pageSize = 20,
+                initialLoadSize = 20
+            )
+        ) { booksRepository.getBooksList(BookStatus.FAVOURITE.status) }
+            .flow
+            .map { books -> books.map { mapper(it) } }
     }
 
 }

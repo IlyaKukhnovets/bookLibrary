@@ -1,11 +1,13 @@
-package com.example.bookapp.presentation.viewstate
+package com.example.bookapp.presentation.viewstate.home
 
 data class BookItemViewState(
     val id: Int,
     val name: String,
     val author: String,
     val image: String?,
-    val status: BookStatus
+    val objectId: String,
+    val status: BookStatus,
+    val series: String?
 )
 
 enum class BookStatus(val status: Int) {

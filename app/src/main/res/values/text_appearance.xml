@@ -3,7 +3,7 @@
 
     <!--Title style-->
     <style name="Title">
-        <item name="android:textSize">@dimen/font_size_24_30</item>
+        <item name="android:textSize">@dimen/font_size_30_32</item>
     </style>
 
     <style name="Title.Bold">
@@ -16,7 +16,7 @@
 
     <!--Header style-->
     <style name="Header">
-        <item name="android:textSize">@dimen/font_size_20_24</item>
+        <item name="android:textSize">@dimen/font_size_22_24</item>
     </style>
 
     <style name="Header.Bold">
@@ -41,7 +41,7 @@
 
     <!--SubHeader style-->
     <style name="SubHeader">
-        <item name="android:textSize">@dimen/font_size_16_20</item>
+        <item name="android:textSize">@dimen/font_size_18_20</item>
     </style>
 
     <style name="SubHeader.Bold">
@@ -73,11 +73,44 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Base.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Base.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
     <style name="Base.Primary">
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
     <style name="Base.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!--SubBaseStyle-->
+    <style name="SubBase">
+        <item name="android:textSize">@dimen/font_size_12_14</item>
+    </style>
+
+    <style name="SubBase.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubBase.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubBase.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="SubBase.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubBase.Secondary">
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 
@@ -96,6 +129,14 @@
 
     <style name="Secondary.Disabled">
         <item name="android:textColor">@color/text_disabled</item>
+    </style>
+
+    <style name="Secondary.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Secondary.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 
 </resources>
