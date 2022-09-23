@@ -89,6 +89,31 @@
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 
+    <!--SubBaseStyle-->
+    <style name="SubBase">
+        <item name="android:textSize">@dimen/font_size_12_14</item>
+    </style>
+
+    <style name="SubBase.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubBase.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubBase.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="SubBase.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="SubBase.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
     <!--Secondary style-->
     <style name="Secondary">
         <item name="android:textSize">@dimen/font_size_10_12</item>
@@ -104,6 +129,14 @@
 
     <style name="Secondary.Disabled">
         <item name="android:textColor">@color/text_disabled</item>
+    </style>
+
+    <style name="Secondary.Bold.Primary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Secondary.Bold.Secondary">
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 
 </resources>

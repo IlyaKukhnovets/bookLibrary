@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginEnd="8dp"
+    android:layout_width="110dp"
+    android:layout_height="230dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/iv_book_series"
+            android:layout_width="110dp"
+            android:scaleType="fitXY"
+            android:layout_height="170dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_book_name"
+            style="@style/SubBase.Bold.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:lines="2"
+            android:ellipsize="end"
+            tools:text="Наследник из Калькутты" />
+
+        <TextView
+            android:id="@+id/tv_book_author"
+            style="@style/Secondary.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:lines="1"
+            android:ellipsize="end"
+            tools:text="Роберт Штильмарк" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

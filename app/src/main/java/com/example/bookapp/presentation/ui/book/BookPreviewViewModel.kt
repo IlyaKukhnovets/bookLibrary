@@ -6,30 +6,50 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.data.repository.BooksRepository
 import com.example.bookapp.data.state.LoadingResult
-import com.example.bookapp.presentation.viewstate.BookPreviewViewState
-import com.example.bookapp.presentation.viewstate.BookPreviewViewStateMapper
+import com.example.bookapp.presentation.viewstate.book.BookPreviewViewState
+import com.example.bookapp.presentation.viewstate.book.BookPreviewViewStateMapper
+import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
+import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewStateMapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BookPreviewViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val viewStateMapper: BookPreviewViewStateMapper
+    private val bookViewStateMapper: BookPreviewViewStateMapper,
+    private val bookSeriesViewStateMapper: BooksSeriesViewStateMapper
 ) : ViewModel() {
 
-    private val _bookLiveData = MutableLiveData<LoadingResult<List<BookPreviewViewState>>>()
-    val bookLiveData: LiveData<LoadingResult<List<BookPreviewViewState>>> = _bookLiveData
+    private val _bookLiveData = MutableLiveData<BookPreviewViewState>()
+    val bookLiveData: LiveData<BookPreviewViewState> = _bookLiveData
 
-    fun loadBookById(bookId: Int) {
+    private val _bookSeriesLiveData = MutableLiveData<List<BooksSeriesViewState>>()
+    val booksSeriesLiveData: LiveData<List<BooksSeriesViewState>> = _bookSeriesLiveData
+
+    private val _progressLiveData = MutableLiveData<LoadingResult<Unit>>()
+    val progressLiveData: LiveData<LoadingResult<Unit>> = _progressLiveData
+
+    fun loadBookById(objectId: String) {
         viewModelScope.launch {
             try {
-                _bookLiveData.postValue(LoadingResult.Loading)
-                _bookLiveData.postValue(
-                    LoadingResult.Success(
-                        viewStateMapper(booksRepository.getBookById(bookId))
-                    )
-                )
+                _progressLiveData.postValue(LoadingResult.Loading)
+                _bookLiveData.postValue(bookViewStateMapper(booksRepository.getBookById(objectId)))
+                _progressLiveData.postValue(LoadingResult.success())
             } catch (e: Exception) {
-                _bookLiveData.postValue(LoadingResult.Error(e))
+                _progressLiveData.postValue(LoadingResult.Error(e))
+            }
+        }
+    }
+
+    fun loadBookSeries(series: String) {
+        viewModelScope.launch {
+            try {
+                _progressLiveData.postValue(LoadingResult.Loading)
+                _bookSeriesLiveData.postValue(
+                    bookSeriesViewStateMapper(booksRepository.getBookSeries(series))
+                )
+                _progressLiveData.postValue(LoadingResult.success())
+            } catch (e: Exception) {
+                _progressLiveData.postValue(LoadingResult.Error(e))
             }
         }
     }

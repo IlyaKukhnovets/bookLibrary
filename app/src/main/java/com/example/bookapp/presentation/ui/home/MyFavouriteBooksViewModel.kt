@@ -6,9 +6,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.bookapp.data.repository.BooksRepository
-import com.example.bookapp.presentation.viewstate.BookItemViewState
-import com.example.bookapp.presentation.viewstate.BookItemViewStateMapper
-import com.example.bookapp.presentation.viewstate.BookStatus
+import com.example.bookapp.presentation.viewstate.home.BookItemViewState
+import com.example.bookapp.presentation.viewstate.home.BookItemViewStateMapper
+import com.example.bookapp.presentation.viewstate.home.BookStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

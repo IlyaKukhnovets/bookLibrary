@@ -30,8 +30,7 @@
     <fragment
         android:id="@+id/bookPreviewFragment"
         android:name="com.example.bookapp.presentation.ui.book.BookPreviewFragment"
-        android:label="BookPreviewFragment">
-    </fragment>
+        android:label="BookPreviewFragment"/>
     <fragment
         android:id="@+id/authorPreviewFragment"
         android:name="com.example.bookapp.presentation.ui.author.AuthorPreviewFragment"

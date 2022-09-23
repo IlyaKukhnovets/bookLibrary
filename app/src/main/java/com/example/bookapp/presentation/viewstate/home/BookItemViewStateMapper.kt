@@ -1,6 +1,7 @@
-package com.example.bookapp.presentation.viewstate
+package com.example.bookapp.presentation.viewstate.home
 
-import com.example.bookapp.data.model.BookItemModel
+import com.example.bookapp.data.model.book.BookItemModel
+import com.example.bookapp.presentation.viewstate.Mapper
 import javax.inject.Inject
 
 class BookItemViewStateMapper @Inject constructor() : Mapper<BookItemModel, BookItemViewState> {
@@ -9,8 +10,10 @@ class BookItemViewStateMapper @Inject constructor() : Mapper<BookItemModel, Book
             id = entity.id,
             name = entity.name,
             author = entity.author,
+            objectId = entity.objectId,
             image = entity.image,
-            status = mapBookStatus(entity.status)
+            status = mapBookStatus(entity.status),
+            series = entity.series
         )
     }
 }

@@ -1,12 +1,15 @@
 package com.example.bookapp.presentation.ui.home
 
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentMyFavouriteBooksBinding
@@ -16,9 +19,10 @@ import com.example.bookapp.presentation.base.BasePaginationAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
-import com.example.bookapp.presentation.viewstate.BookItemViewState
+import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
+import kotlin.math.abs
 
 class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_books), Injectable {
 
@@ -32,6 +36,22 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
         onItemClickListener = ::itemListener
     )
 
+    private val gestureDetector =
+        GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onScroll(
+                e1: MotionEvent?,
+                e2: MotionEvent?,
+                distanceX: Float,
+                distanceY: Float
+            ): Boolean {
+                return when {
+                    distanceX > 10 && abs(distanceY) < abs(distanceX) -> true
+                    distanceX < -10 && abs(distanceY) < abs(distanceX) -> true
+                    else -> false
+                }
+            }
+        })
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -40,6 +60,14 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
 
     private fun initView() {
         binding.rvList.rvRecycler.adapter = adapter
+        binding.rvList.rvRecycler.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                return gestureDetector.onTouchEvent(e)
+            }
+
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+        })
         binding.refreshLayout.setOnRefreshListener {
             adapter.refresh()
         }
@@ -75,7 +103,8 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
 
     private fun itemListener(item: BookItemViewState, view: View, position: Int) {
         val bundle = bundleOf(
-            "KEY_BOOK_ID" to item.id
+            BooksFragmentContainer.KEY_BOOK_OBJECT_ID to item.objectId,
+            BooksFragmentContainer.KEY_BOOK_SERIES to item.series
         )
         findNavController().navigate(
             R.id.action_booksFragmentContainer_to_bookPreviewFragment,

@@ -7,7 +7,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.bookapp.R
 import com.example.bookapp.databinding.ItemMyBooksBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
-import com.example.bookapp.presentation.viewstate.BookItemViewState
+import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 
 class BookItem(override val viewState: BookItemViewState) :
     BaseRecyclerItem<ItemMyBooksBinding, BookItemViewState> {
