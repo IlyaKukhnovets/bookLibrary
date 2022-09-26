@@ -15,20 +15,13 @@ import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
+import com.example.bookapp.presentation.ui.author.AuthorPreviewViewModel
+import com.example.bookapp.presentation.ui.base.KEY_ARGS
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
 class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), Injectable {
-
-    companion object {
-        const val KEY_BOOK_SERIES = "KEY_BOOK_SERIES"
-        const val KEY_BOOK_OBJECT_ID = "KEY_BOOK_OBJECT_ID"
-        const val KEY_AUTHOR_OBJECT_ID = "KEY_AUTHOR_OBJECT_ID"
-        const val KEY_AUTHOR_GENRE = "KEY_AUTHOR_GENRE"
-        const val KEY_AUTHOR_ID = "KEY_AUTHOR_ID"
-        const val KEY_AUTHOR = "KEY_AUTHOR"
-    }
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -81,12 +74,14 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
 
     private fun mapItem(viewState: AuthorItemViewState) = BookTopItem(viewState)
 
-    private fun itemListener(item: AuthorItemViewState, view: View, position: Int) {
+    private fun itemListener(item: AuthorItemViewState) {
         val bundle = bundleOf(
-            KEY_AUTHOR_OBJECT_ID to item.objectId,
-            KEY_AUTHOR_GENRE to item.genre,
-            KEY_AUTHOR_ID to item.id,
-            KEY_AUTHOR to item.name
+            KEY_ARGS to AuthorPreviewViewModel.AuthorPreviewArgs(
+                item.objectId,
+                item.genre,
+                item.id,
+                item.name
+            )
         )
         findNavController().navigate(
             R.id.action_booksFragmentContainer_to_authorPreviewFragment,

@@ -18,8 +18,9 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
+import com.example.bookapp.presentation.ui.base.KEY_ARGS
+import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
 import com.example.bookapp.presentation.ui.book.BooksSeriesItem
-import com.example.bookapp.presentation.ui.home.BooksFragmentContainer
 import com.example.bookapp.presentation.viewstate.author.AuthorRelativeViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
@@ -33,17 +34,11 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
     private val binding by viewBinding(FragmentAuthorPreviewBinding::bind)
     private val viewModel by lazy { injectViewModel<AuthorPreviewViewModel>(factory) }
 
-    private val objectId by lazy {
-        arguments?.getString(BooksFragmentContainer.KEY_AUTHOR_OBJECT_ID) ?: ""
-    }
-    private val genre by lazy {
-        arguments?.getString(BooksFragmentContainer.KEY_AUTHOR_GENRE) ?: ""
-    }
-    private val authorId by lazy {
-        arguments?.getInt(BooksFragmentContainer.KEY_AUTHOR_ID) ?: -1
-    }
-    private val authorName by lazy {
-        arguments?.getString(BooksFragmentContainer.KEY_AUTHOR) ?: ""
+    private val args by lazy {
+        arguments?.getParcelable<AuthorPreviewViewModel.AuthorPreviewArgs>(KEY_ARGS)
+            ?: throw IllegalArgumentException(
+                "Need arguments for ${this.javaClass}"
+            )
     }
 
     private val authorsAdapter = BaseRecyclerViewAdapter(
@@ -55,8 +50,10 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         mapper = ::mapBookItems
     )
 
-    private fun mapAuthorItems(viewState: AuthorRelativeViewState) = AuthorRelativeItem(viewState)
-    private fun mapBookItems(viewState: BooksSeriesViewState) =
+    private fun mapAuthorItems(viewState: AuthorRelativeViewState.ViewState) =
+        AuthorRelativeItem(viewState)
+
+    private fun mapBookItems(viewState: BooksSeriesViewState.ViewState) =
         BooksSeriesItem(viewState, ::onBookClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,17 +75,17 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
             orientation = LinearLayoutManager.HORIZONTAL
         }
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.loadScreenData(objectId)
-            viewModel.loadRelativeAuthors(genre, authorId)
-            viewModel.loadAuthorBooks(authorName)
+            viewModel.loadScreenData(args.objectId)
+            viewModel.loadRelativeAuthors(args.genre, args.authorId)
+            viewModel.loadAuthorBooks(args.author)
             binding.refreshLayout.isRefreshing = false
         }
     }
 
     private fun initViewModel() {
-        viewModel.loadScreenData(objectId)
-        viewModel.loadRelativeAuthors(genre, authorId)
-        viewModel.loadAuthorBooks(authorName)
+        viewModel.loadScreenData(args.objectId)
+        viewModel.loadRelativeAuthors(args.genre, args.authorId)
+        viewModel.loadAuthorBooks(args.author)
         viewModel.progressLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is LoadingResult.Loading -> {
@@ -108,12 +105,12 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
             initLayout(it)
         }
         viewModel.authorBooksLiveData.observe(viewLifecycleOwner) {
-            binding.flAuthorBooks.show(viewModel.isShowAuthorsBookSection())
-            authorBooksAdapter.replaceElementsWithDiffUtil(it)
+            binding.flAuthorBooks.show(it.isShowTitle)
+            authorBooksAdapter.replaceElementsWithDiffUtil(it.state)
         }
         viewModel.relativeAuthorsLiveData.observe(viewLifecycleOwner) {
-            binding.tvRelativeAuthorsTitle.show(viewModel.isShowAuthorsHeader())
-            authorsAdapter.replaceElementsWithDiffUtil(it)
+            binding.tvRelativeAuthorsTitle.show(it.isShowTitle)
+            authorsAdapter.replaceElementsWithDiffUtil(it.state)
         }
     }
 
@@ -130,20 +127,25 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         binding.tvRelativeAuthorsTitle.text = "Похожие авторы"
     }
 
-    private fun onAuthorClick(viewState: AuthorRelativeViewState, view: View, position: Int) {
+    private fun onAuthorClick(item: AuthorRelativeViewState.ViewState) {
         val bundle = bundleOf(
-            BooksFragmentContainer.KEY_AUTHOR_OBJECT_ID to viewState.objectId,
-            BooksFragmentContainer.KEY_AUTHOR_GENRE to viewState.genre,
-            BooksFragmentContainer.KEY_AUTHOR_ID to viewState.id,
-            BooksFragmentContainer.KEY_AUTHOR to viewState.name
+            KEY_ARGS to AuthorPreviewViewModel.AuthorPreviewArgs(
+                item.objectId,
+                item.genre,
+                item.id,
+                item.name
+            )
         )
         findNavController().navigate(R.id.authorPreviewFragment, bundle)
     }
 
     private fun onBookClick(objectId: String, bookSeries: String) {
         val bundle = bundleOf(
-            BooksFragmentContainer.KEY_BOOK_OBJECT_ID to objectId,
-            BooksFragmentContainer.KEY_BOOK_SERIES to bookSeries
+            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
+                objectId,
+                bookSeries,
+                args.genre
+            )
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)
     }

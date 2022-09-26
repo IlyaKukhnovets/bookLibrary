@@ -7,5 +7,6 @@ data class BookItemModel(
     val image: String?,
     val status: Int,
     val objectId: String,
-    val series: String?
+    val series: String?,
+    val genre: String
 )

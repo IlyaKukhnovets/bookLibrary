@@ -19,6 +19,8 @@ import com.example.bookapp.presentation.base.BasePaginationAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
+import com.example.bookapp.presentation.ui.base.KEY_ARGS
+import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
 import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -101,10 +103,13 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
 
     private fun mapItems(viewState: BookItemViewState) = BookItem(viewState)
 
-    private fun itemListener(item: BookItemViewState, view: View, position: Int) {
+    private fun itemListener(item: BookItemViewState) {
         val bundle = bundleOf(
-            BooksFragmentContainer.KEY_BOOK_OBJECT_ID to item.objectId,
-            BooksFragmentContainer.KEY_BOOK_SERIES to item.series
+            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
+                item.objectId,
+                item.series,
+                item.genre
+            )
         )
         findNavController().navigate(
             R.id.action_booksFragmentContainer_to_bookPreviewFragment,

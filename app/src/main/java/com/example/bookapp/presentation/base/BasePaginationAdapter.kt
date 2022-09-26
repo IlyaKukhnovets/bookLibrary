@@ -11,8 +11,8 @@ import androidx.viewbinding.ViewBinding
 
 class BasePaginationAdapter<VS : Any>(
     private val mapper: (VS) -> BaseRecyclerItem<out ViewBinding, VS>,
-    private val onItemClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null,
-    private val onItemLongClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null
+    private val onItemClickListener: ((item: VS) -> Unit)? = null,
+    private val onItemLongClickListener: ((item: VS) -> Unit)? = null
 ) : PagingDataAdapter<BaseRecyclerItem<out ViewBinding, VS>, BaseViewHolder<ViewBinding, VS>>(
     DiffUtilItemCallback()
 ) {
