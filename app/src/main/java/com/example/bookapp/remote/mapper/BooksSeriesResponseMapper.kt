@@ -13,6 +13,8 @@ class BooksSeriesResponseMapper @Inject constructor() :
                 img = it.src,
                 author = it.author,
                 bookName = it.name,
+                objectId = it.objectId,
+                series = it.series,
                 id = it.id,
                 order = it.seriesOrder
             )

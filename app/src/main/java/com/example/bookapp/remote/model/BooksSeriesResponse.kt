@@ -13,6 +13,10 @@ data class BooksSeriesResponse(
     val name: String,
     @Json(name = "id")
     val id: Int,
+    @Json(name = "series")
+    val series: String?,
     @Json(name = "series_order")
-    val seriesOrder: Int
+    val seriesOrder: Int?,
+    @Json(name = "objectId")
+    val objectId: String
 )

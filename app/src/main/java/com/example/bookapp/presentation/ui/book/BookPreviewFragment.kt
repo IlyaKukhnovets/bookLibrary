@@ -33,11 +33,10 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private val viewModel by lazy { injectViewModel<BookPreviewViewModel>(factory) }
     private val binding by viewBinding(FragmentBookPreviewBinding::bind)
     private val adapter = BaseRecyclerViewAdapter(
-        mapper = ::mapItems,
-        onItemClickListener = ::onItemListener
+        mapper = ::mapItems
     )
 
-    private fun mapItems(viewState: BooksSeriesViewState) = BooksSeriesItem(viewState)
+    private fun mapItems(viewState: BooksSeriesViewState) = BooksSeriesItem(viewState, ::onItemListener)
 
     private val bookId by lazy { arguments?.getString(BooksFragmentContainer.KEY_BOOK_OBJECT_ID) ?: "" }
     private val bookSeries by lazy {
@@ -129,9 +128,9 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
         }
     }
 
-    private fun onItemListener(viewState: BooksSeriesViewState, view: View, position: Int) {
+    private fun onItemListener(objectId: String, bookSeries: String) {
         val bundle = bundleOf(
-            BooksFragmentContainer.KEY_BOOK_ID to viewState.id,
+            BooksFragmentContainer.KEY_BOOK_OBJECT_ID to objectId,
             BooksFragmentContainer.KEY_BOOK_SERIES to bookSeries
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)

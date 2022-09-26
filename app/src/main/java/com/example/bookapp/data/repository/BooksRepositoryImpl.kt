@@ -50,4 +50,10 @@ class BooksRepositoryImpl @Inject constructor(
             booksDataSource.getBookSeries(series)
         }
     }
+
+    override suspend fun getAuthorBooks(authorName: String): List<BooksSeriesModel> {
+        return withContext(ioDispatcher) {
+            booksDataSource.getAuthorBooks(authorName)
+        }
+    }
 }

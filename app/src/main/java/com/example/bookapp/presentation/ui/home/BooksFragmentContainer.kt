@@ -22,12 +22,12 @@ import javax.inject.Inject
 class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), Injectable {
 
     companion object {
-        const val KEY_BOOK_ID = "KEY_BOOK_ID"
         const val KEY_BOOK_SERIES = "KEY_BOOK_SERIES"
         const val KEY_BOOK_OBJECT_ID = "KEY_BOOK_OBJECT_ID"
         const val KEY_AUTHOR_OBJECT_ID = "KEY_AUTHOR_OBJECT_ID"
         const val KEY_AUTHOR_GENRE = "KEY_AUTHOR_GENRE"
         const val KEY_AUTHOR_ID = "KEY_AUTHOR_ID"
+        const val KEY_AUTHOR = "KEY_AUTHOR"
     }
 
     @Inject
@@ -85,7 +85,8 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
         val bundle = bundleOf(
             KEY_AUTHOR_OBJECT_ID to item.objectId,
             KEY_AUTHOR_GENRE to item.genre,
-            KEY_AUTHOR_ID to item.id
+            KEY_AUTHOR_ID to item.id,
+            KEY_AUTHOR to item.name
         )
         findNavController().navigate(
             R.id.action_booksFragmentContainer_to_authorPreviewFragment,

@@ -17,6 +17,9 @@
             android:id="@+id/iv_book_series"
             android:layout_width="110dp"
             android:scaleType="fitXY"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:layout_height="170dp"
             tools:ignore="ContentDescription" />
 
