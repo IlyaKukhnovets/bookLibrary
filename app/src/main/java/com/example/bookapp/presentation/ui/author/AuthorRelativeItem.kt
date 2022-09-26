@@ -9,8 +9,8 @@ import com.example.bookapp.databinding.ItemRelativeAuthorsBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
 import com.example.bookapp.presentation.viewstate.author.AuthorRelativeViewState
 
-class AuthorRelativeItem(override val viewState: AuthorRelativeViewState) :
-    BaseRecyclerItem<ItemRelativeAuthorsBinding, AuthorRelativeViewState> {
+class AuthorRelativeItem(override val viewState: AuthorRelativeViewState.ViewState) :
+    BaseRecyclerItem<ItemRelativeAuthorsBinding, AuthorRelativeViewState.ViewState> {
 
     override fun getViewId(): Int = R.layout.item_relative_authors
 

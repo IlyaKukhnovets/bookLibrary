@@ -5,16 +5,19 @@ import com.example.bookapp.presentation.viewstate.Mapper
 import javax.inject.Inject
 
 class AuthorRelativeViewStateMapper @Inject constructor() :
-    Mapper<List<AuthorRelativeModel>, List<AuthorRelativeViewState>> {
-    override fun invoke(entity: List<AuthorRelativeModel>): List<AuthorRelativeViewState> {
-        return entity.map { author ->
-            AuthorRelativeViewState(
-                img = author.img,
-                genre = author.genre,
-                objectId = author.objectId,
-                id = author.id,
-                name = author.name
-            )
-        }
+    Mapper<List<AuthorRelativeModel>, AuthorRelativeViewState> {
+    override fun invoke(entity: List<AuthorRelativeModel>): AuthorRelativeViewState {
+        return AuthorRelativeViewState(
+            state = entity.map {
+                AuthorRelativeViewState.ViewState(
+                    img = it.img,
+                    genre = it.genre,
+                    objectId = it.objectId,
+                    id = it.id,
+                    name = it.name
+                )
+            },
+            isShowTitle = entity.isNotEmpty()
+        )
     }
 }

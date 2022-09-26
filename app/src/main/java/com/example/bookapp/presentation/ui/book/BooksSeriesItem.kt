@@ -10,9 +10,9 @@ import com.example.bookapp.presentation.base.BaseRecyclerItem
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 
 class BooksSeriesItem(
-    override val viewState: BooksSeriesViewState,
+    override val viewState: BooksSeriesViewState.ViewState,
     private val itemListener: (String, String) -> Unit
-) : BaseRecyclerItem<ItemBooksSeriesBinding, BooksSeriesViewState> {
+) : BaseRecyclerItem<ItemBooksSeriesBinding, BooksSeriesViewState.ViewState> {
 
     override fun getViewId() = R.layout.item_books_series
 

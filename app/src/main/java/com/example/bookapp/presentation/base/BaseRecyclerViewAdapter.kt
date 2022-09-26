@@ -10,8 +10,8 @@ import kotlin.reflect.KFunction0
 
 class BaseRecyclerViewAdapter<VS : Any>(
     private val mapper: (VS) -> BaseRecyclerItem<out ViewBinding, VS>,
-    private val onItemClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null,
-    private val onItemLongClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null
+    private val onItemClickListener: ((item: VS) -> Unit)? = null,
+    private val onItemLongClickListener: ((item: VS) -> Unit)? = null
 ) : RecyclerView.Adapter<BaseViewHolder<ViewBinding, VS>>() {
 
     private val dataset = mutableListOf<BaseRecyclerItem<out ViewBinding, VS>>()

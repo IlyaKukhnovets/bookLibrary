@@ -1,5 +1,6 @@
 package com.example.bookapp.presentation.ui.author
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewStateMappe
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewStateMapper
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 class AuthorPreviewViewModel @Inject constructor(
@@ -27,14 +29,14 @@ class AuthorPreviewViewModel @Inject constructor(
     private val _authorLiveData = MutableLiveData<AuthorItemViewState>()
     val authorLiveData: LiveData<AuthorItemViewState> = _authorLiveData
 
-    private val _authorBooksLiveData = MutableLiveData<List<BooksSeriesViewState>>()
-    val authorBooksLiveData: LiveData<List<BooksSeriesViewState>> = _authorBooksLiveData
+    private val _authorBooksLiveData = MutableLiveData<BooksSeriesViewState>()
+    val authorBooksLiveData: LiveData<BooksSeriesViewState> = _authorBooksLiveData
 
     private val _progressLiveData = MutableLiveData<LoadingResult<Unit>>()
     val progressLiveData: LiveData<LoadingResult<Unit>> = _progressLiveData
 
-    private val _relativeAuthorsLiveData = MutableLiveData<List<AuthorRelativeViewState>>()
-    val relativeAuthorsLiveData: LiveData<List<AuthorRelativeViewState>> = _relativeAuthorsLiveData
+    private val _relativeAuthorsLiveData = MutableLiveData<AuthorRelativeViewState>()
+    val relativeAuthorsLiveData: LiveData<AuthorRelativeViewState> = _relativeAuthorsLiveData
 
     fun loadScreenData(authorId: String) {
         viewModelScope.launch {
@@ -78,8 +80,12 @@ class AuthorPreviewViewModel @Inject constructor(
         }
     }
 
-    fun isShowAuthorsHeader(): Boolean = !_relativeAuthorsLiveData.value.isNullOrEmpty()
-
-    fun isShowAuthorsBookSection(): Boolean = !_authorBooksLiveData.value.isNullOrEmpty()
+    @Parcelize
+    data class AuthorPreviewArgs(
+        val objectId: String,
+        val genre: String,
+        val authorId: Int,
+        val author: String
+    ) : Parcelable
 
 }

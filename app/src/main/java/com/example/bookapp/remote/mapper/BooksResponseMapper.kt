@@ -15,7 +15,8 @@ class BooksResponseMapper @Inject constructor() : Mapper<List<BooksResponse>, Li
                 image = book.src,
                 objectId = book.objectId,
                 status = book.status,
-                series = book.series
+                series = book.series,
+                genre = book.genre
             )
         }
     }

@@ -7,7 +7,8 @@ data class BookItemViewState(
     val image: String?,
     val objectId: String,
     val status: BookStatus,
-    val series: String?
+    val series: String?,
+    val genre: String
 )
 
 enum class BookStatus(val status: Int) {

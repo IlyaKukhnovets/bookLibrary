@@ -13,7 +13,8 @@ class BookItemViewStateMapper @Inject constructor() : Mapper<BookItemModel, Book
             objectId = entity.objectId,
             image = entity.image,
             status = mapBookStatus(entity.status),
-            series = entity.series
+            series = entity.series,
+            genre = entity.genre
         )
     }
 }
