@@ -108,7 +108,8 @@ class MyBooksFragment : BaseFragment(R.layout.fragment_books), Injectable {
             KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
                 item.objectId,
                 item.series,
-                item.genre
+                item.genre,
+                item.id
             )
         )
         findNavController().navigate(

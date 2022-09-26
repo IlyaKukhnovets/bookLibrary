@@ -16,7 +16,8 @@ class BooksSeriesResponseMapper @Inject constructor() :
                 objectId = it.objectId,
                 series = it.series,
                 id = it.id,
-                order = it.seriesOrder
+                order = it.seriesOrder,
+                genre = it.genre
             )
         }
     }

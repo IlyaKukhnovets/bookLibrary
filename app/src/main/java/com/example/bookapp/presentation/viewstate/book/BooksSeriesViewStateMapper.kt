@@ -17,7 +17,8 @@ class BooksSeriesViewStateMapper @Inject constructor() :
                     objectId = it.objectId,
                     series = it.series ?: "",
                     id = it.id,
-                    order = it.order ?: 0
+                    order = it.order ?: 0,
+                    genre = it.genre
                 )
             }
         )

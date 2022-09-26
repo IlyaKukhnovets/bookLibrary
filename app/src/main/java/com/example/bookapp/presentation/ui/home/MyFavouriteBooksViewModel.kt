@@ -1,10 +1,8 @@
 package com.example.bookapp.presentation.ui.home
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.map
+import androidx.lifecycle.viewModelScope
+import androidx.paging.*
 import com.example.bookapp.data.repository.BooksRepository
 import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 import com.example.bookapp.presentation.viewstate.home.BookItemViewStateMapper
