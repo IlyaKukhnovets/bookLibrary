@@ -9,4 +9,5 @@ interface BooksRepository {
     fun getBooksList(status: Int? = null): PagingSource<Int, BookItemModel>
     suspend fun getBookById(bookId: String): BookPreviewModel
     suspend fun getBookSeries(series: String): List<BooksSeriesModel>
+    suspend fun getAuthorBooks(authorName: String): List<BooksSeriesModel>
 }

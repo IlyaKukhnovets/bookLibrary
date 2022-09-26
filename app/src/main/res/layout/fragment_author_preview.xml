@@ -9,19 +9,46 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
+        style="@style/Theme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background_content"
+        android:layout_height="250dp"
+        android:background="@color/background_page"
         android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentInsetStart="0dp"
-            app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            android:layout_height="match_parent"
+            android:background="@color/background_page"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@null"
+            app:expandedTitleGravity="bottom|center"
+            app:expandedTitleMarginBottom="8dp"
+            app:expandedTitleTextColor="@color/yellow_dark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_author_image"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="80dp"
+                app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Theme"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:background="@color/background_page"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,27 +80,58 @@
                     android:orientation="vertical"
                     tools:ignore="UseCompoundDrawables">
 
-                    <ImageView
-                        android:id="@+id/iv_author_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="16dp"
-                        android:adjustViewBounds="true"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/tv_author_name"
-                        style="@style/Header.Bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/yellow_dark" />
-
                     <TextView
                         android:id="@+id/tv_biography"
                         style="@style/Base.Primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp" />
+
+                    <FrameLayout
+                        android:id="@+id/fl_author_books"
+                        android:visibility="gone"
+                        android:layout_marginTop="16dp"
+                        tools:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:backgroundTint="@color/background_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_rounded_corners_8dp">
+
+                        <TextView
+                            style="@style/SubHeader.Bold.Primary"
+                            android:textColor="@color/yellow_dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Все книги автора" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_arrow_right_small"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            style="@style/Base.Secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="32dp"
+                            tools:text="14 книг" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_author_books"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="56dp"
+                            android:paddingBottom="2dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginStart="16dp" />
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tv_relative_authors_title"

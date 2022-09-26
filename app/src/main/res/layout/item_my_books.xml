@@ -4,7 +4,10 @@
     android:id="@+id/ll_book_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_content"
+    android:background="@color/background_page"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -14,7 +17,6 @@
         android:layout_height="180dp"
         android:elevation="8dp"
         android:scaleType="fitXY"
-        android:adjustViewBounds="true"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
