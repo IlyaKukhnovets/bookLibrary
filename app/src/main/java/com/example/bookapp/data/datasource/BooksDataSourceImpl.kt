@@ -32,4 +32,8 @@ class BooksDataSourceImpl @Inject constructor(
         return booksSeriesResponseMapper(service.getBookSeries("series='$series'"))
     }
 
+    override suspend fun getAuthorBooks(authorName: String): List<BooksSeriesModel> {
+        return booksSeriesResponseMapper(service.getBookSeries("author='$authorName'"))
+    }
+
 }

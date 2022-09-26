@@ -9,8 +9,10 @@ import com.example.bookapp.databinding.ItemBooksSeriesBinding
 import com.example.bookapp.presentation.base.BaseRecyclerItem
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 
-class BooksSeriesItem(override val viewState: BooksSeriesViewState) :
-    BaseRecyclerItem<ItemBooksSeriesBinding, BooksSeriesViewState> {
+class BooksSeriesItem(
+    override val viewState: BooksSeriesViewState,
+    private val itemListener: (String, String) -> Unit
+) : BaseRecyclerItem<ItemBooksSeriesBinding, BooksSeriesViewState> {
 
     override fun getViewId() = R.layout.item_books_series
 
@@ -25,5 +27,9 @@ class BooksSeriesItem(override val viewState: BooksSeriesViewState) :
             .into(binding.ivBookSeries)
         binding.tvBookName.text = viewState.bookName
         binding.tvBookAuthor.text = viewState.author
+
+        binding.ivBookSeries.setOnClickListener {
+            itemListener.invoke(viewState.objectId, viewState.series)
+        }
     }
 }

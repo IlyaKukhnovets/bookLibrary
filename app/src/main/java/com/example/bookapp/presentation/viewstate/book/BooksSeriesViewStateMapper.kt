@@ -11,8 +11,10 @@ class BooksSeriesViewStateMapper @Inject constructor() : Mapper<List<BooksSeries
                 img = it.img,
                 author = it.author,
                 bookName = it.bookName,
+                objectId = it.objectId,
+                series = it.series ?: "",
                 id = it.id,
-                order = it.order
+                order = it.order ?: 0
             )
         }
     }
