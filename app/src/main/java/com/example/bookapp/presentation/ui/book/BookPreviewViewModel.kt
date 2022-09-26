@@ -61,12 +61,12 @@ class BookPreviewViewModel @Inject constructor(
         }
     }
 
-    fun loadRelativeBooks(genre: String) {
+    fun loadRelativeBooks(genre: String, bookId: Int) {
         viewModelScope.launch {
             try {
                 _progressLiveData.postValue(LoadingResult.Loading)
                 _relativeBooksLiveData.postValue(
-                    bookSeriesViewStateMapper(booksRepository.getRelativeBooks(genre))
+                    bookSeriesViewStateMapper(booksRepository.getRelativeBooks(genre, bookId))
                 )
                 _progressLiveData.postValue(LoadingResult.success())
             } catch (e: Exception) {
@@ -79,7 +79,8 @@ class BookPreviewViewModel @Inject constructor(
     data class MyBooksArgs(
         val objectId: String,
         val series: String?,
-        val genre: String
+        val genre: String,
+        val bookId: Int
     ) : Parcelable
 
 }

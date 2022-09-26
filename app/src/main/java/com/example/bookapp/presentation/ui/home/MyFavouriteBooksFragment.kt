@@ -108,7 +108,8 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
             KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
                 item.objectId,
                 item.series,
-                item.genre
+                item.genre,
+                item.id
             )
         )
         findNavController().navigate(

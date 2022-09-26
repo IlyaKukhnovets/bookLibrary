@@ -27,6 +27,6 @@ interface BooksService {
 
     @GET("$SERVICE_PREFIX?")
     suspend fun getBooksWithArgs(
-        @Query("where") series: String
+        @Query("where") args: String
     ): List<BooksSeriesResponse>
 }

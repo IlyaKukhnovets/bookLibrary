@@ -57,9 +57,9 @@ class BooksRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getRelativeBooks(genre: String): List<BooksSeriesModel> {
+    override suspend fun getRelativeBooks(genre: String, bookId: Int): List<BooksSeriesModel> {
         return withContext(ioDispatcher) {
-            booksDataSource.getRelativeBooks(genre)
+            booksDataSource.getRelativeBooks(genre, bookId)
         }
     }
 }

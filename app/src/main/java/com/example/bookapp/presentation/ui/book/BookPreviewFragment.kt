@@ -68,7 +68,7 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
         binding.refreshLayout.setOnRefreshListener {
             viewModel.loadBookById(args.objectId)
             viewModel.loadBookSeries(args.series)
-            viewModel.loadRelativeBooks(args.genre)
+            viewModel.loadRelativeBooks(args.genre, args.bookId)
             binding.refreshLayout.isRefreshing = false
         }
     }
@@ -76,7 +76,7 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private fun initViewModel() {
         viewModel.loadBookById(args.objectId)
         viewModel.loadBookSeries(args.series)
-        viewModel.loadRelativeBooks(args.genre)
+        viewModel.loadRelativeBooks(args.genre, args.bookId)
         viewModel.progressLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is LoadingResult.Loading -> {
@@ -132,13 +132,9 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
         }
     }
 
-    private fun onItemListener(objectId: String, bookSeries: String) {
+    private fun onItemListener(viewState: BookPreviewViewModel.MyBooksArgs) {
         val bundle = bundleOf(
-            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
-                objectId,
-                bookSeries,
-                args.genre
-            )
+            KEY_ARGS to viewState
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)
     }

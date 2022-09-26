@@ -139,13 +139,9 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         findNavController().navigate(R.id.authorPreviewFragment, bundle)
     }
 
-    private fun onBookClick(objectId: String, bookSeries: String) {
+    private fun onBookClick(viewState: BookPreviewViewModel.MyBooksArgs) {
         val bundle = bundleOf(
-            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
-                objectId,
-                bookSeries,
-                args.genre
-            )
+            KEY_ARGS to viewState
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)
     }
