@@ -18,7 +18,7 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
-import com.example.bookapp.presentation.ui.home.BooksFragmentContainer
+import com.example.bookapp.presentation.ui.base.KEY_ARGS
 import com.example.bookapp.presentation.viewstate.book.BookPreviewViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 import com.example.bookapp.presentation.viewstate.home.BookStatus
@@ -32,15 +32,19 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
     private val viewModel by lazy { injectViewModel<BookPreviewViewModel>(factory) }
     private val binding by viewBinding(FragmentBookPreviewBinding::bind)
-    private val adapter = BaseRecyclerViewAdapter(
+    private val booksSeriesAdapter = BaseRecyclerViewAdapter(
+        mapper = ::mapItems
+    )
+    private val relativeBooksAdapter = BaseRecyclerViewAdapter(
         mapper = ::mapItems
     )
 
-    private fun mapItems(viewState: BooksSeriesViewState) = BooksSeriesItem(viewState, ::onItemListener)
+    private fun mapItems(viewState: BooksSeriesViewState.ViewState) =
+        BooksSeriesItem(viewState, ::onItemListener)
 
-    private val bookId by lazy { arguments?.getString(BooksFragmentContainer.KEY_BOOK_OBJECT_ID) ?: "" }
-    private val bookSeries by lazy {
-        arguments?.getString(BooksFragmentContainer.KEY_BOOK_SERIES) ?: ""
+    private val args by lazy {
+        arguments?.getParcelable<BookPreviewViewModel.MyBooksArgs>(KEY_ARGS)
+            ?: throw IllegalArgumentException("Need arguments")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,20 +57,26 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        binding.rvSeriesList.adapter = adapter
+        binding.rvSeriesList.adapter = booksSeriesAdapter
         binding.rvSeriesList.layoutManager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
+        binding.rvRelativeBooks.adapter = relativeBooksAdapter
+        binding.rvRelativeBooks.layoutManager = LinearLayoutManager(context).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.loadBookById(bookId)
-            viewModel.loadBookSeries(bookSeries)
+            viewModel.loadBookById(args.objectId)
+            viewModel.loadBookSeries(args.series)
+            viewModel.loadRelativeBooks(args.genre)
             binding.refreshLayout.isRefreshing = false
         }
     }
 
     private fun initViewModel() {
-        viewModel.loadBookById(bookId)
-        viewModel.loadBookSeries(bookSeries)
+        viewModel.loadBookById(args.objectId)
+        viewModel.loadBookSeries(args.series)
+        viewModel.loadRelativeBooks(args.genre)
         viewModel.progressLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is LoadingResult.Loading -> {
@@ -86,36 +96,30 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
             setScreenData(it)
         }
         viewModel.booksSeriesLiveData.observe(viewLifecycleOwner) {
-            adapter.replaceElementsWithDiffUtil(it)
+            binding.tvSeriesName.show(it.isShowTitle)
+            binding.tvSeriesTitle.show(it.isShowTitle)
+            booksSeriesAdapter.replaceElementsWithDiffUtil(it.state)
+        }
+        viewModel.relativeBooksLiveData.observe(viewLifecycleOwner) {
+            binding.tvRelativeBooks.show(it.isShowTitle)
+            relativeBooksAdapter.replaceElementsWithDiffUtil(it.state)
         }
     }
 
     private fun setScreenData(viewState: BookPreviewViewState) {
         val builder = StringBuilder()
-        Glide.with(binding.root)
-            .load(viewState.image)
-            .transform(BlurTransformation(24))
+        Glide.with(binding.root).load(viewState.image).transform(BlurTransformation(24))
             .into(binding.ivBackgroundTop)
-        Glide.with(binding.root)
-            .load(viewState.image)
-            .transform(RoundedCorners(12))
+        Glide.with(binding.root).load(viewState.image).transform(RoundedCorners(12))
             .into(binding.ivBookImage)
 
         binding.tvBookName.text = viewState.bookName
-        binding.bookAuthorTitle.text = "Автор:"
         binding.tvBookAuthor.text = viewState.author
         binding.tvBookStatus.text = mapBookStatus(viewState.status)
-        binding.tvBookDescriptionTitle.text = "О книге"
         binding.tvBookDescription.text = viewState.bookDescription
         binding.tvBookPagesCount.text =
-            builder
-                .append(viewState.pagesCount.toString())
-                .append(" печатных стр.")
-
+            builder.append(viewState.pagesCount.toString()).append(" печатных стр.")
         binding.tvBookStatus.visibility = View.VISIBLE
-        binding.tvSeriesTitle.show(!viewState.series.isNullOrBlank())
-        binding.tvSeriesTitle.text = "Входит в серию"
-        binding.tvSeriesName.show(!viewState.series.isNullOrBlank())
         binding.tvSeriesName.text = viewState.series
     }
 
@@ -130,8 +134,11 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
     private fun onItemListener(objectId: String, bookSeries: String) {
         val bundle = bundleOf(
-            BooksFragmentContainer.KEY_BOOK_OBJECT_ID to objectId,
-            BooksFragmentContainer.KEY_BOOK_SERIES to bookSeries
+            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
+                objectId,
+                bookSeries,
+                args.genre
+            )
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)
     }

@@ -6,8 +6,8 @@ import androidx.viewbinding.ViewBinding
 
 class BaseViewHolder<BINDING : ViewBinding, VS : Any>(
     private val binding: BINDING,
-    private val onItemClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null,
-    private val onItemLongClickListener: ((item: VS, view: View, position: Int) -> Unit)? = null
+    private val onItemClickListener: ((item: VS) -> Unit)? = null,
+    private val onItemLongClickListener: ((item: VS) -> Unit)? = null
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var item: BaseRecyclerItem<BINDING, VS>? = null
@@ -24,19 +24,19 @@ class BaseViewHolder<BINDING : ViewBinding, VS : Any>(
     private fun setClickListeners(view: View?, holderItem: BaseRecyclerItem<out BINDING, VS>) {
         onItemClickListener?.let {
             view?.setOnClickListener {
-                it(holderItem.viewState, view, absoluteAdapterPosition)
+                it(holderItem.viewState)
             }
         }
         onItemLongClickListener?.let {
             view?.setOnLongClickListener {
-                it(holderItem.viewState, view, absoluteAdapterPosition)
+                it(holderItem.viewState)
                 true
             }
         }
 
         view?.setOnLongClickListener {
             if (onItemLongClickListener != null) {
-                onItemLongClickListener.invoke(holderItem.viewState, view, absoluteAdapterPosition)
+                onItemLongClickListener.invoke(holderItem.viewState)
                 return@setOnLongClickListener true
             }
             return@setOnLongClickListener false

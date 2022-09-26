@@ -79,7 +79,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="@id/tv_book_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
-                    tools:text="Автор:" />
+                    android:text="Автор:" />
 
                 <TextView
                     android:id="@+id/tv_book_author"
@@ -141,7 +141,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_book_image"
-                    tools:text="О книге" />
+                    android:text="О книге" />
 
                 <TextView
                     android:id="@+id/tv_book_description"
@@ -164,7 +164,7 @@
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/tv_book_description"
                     app:layout_constraintTop_toBottomOf="@id/tv_book_description"
-                    tools:text="Входит в серию"
+                    android:text="Входит в серию"
                     tools:visibility="visible" />
 
                 <TextView
@@ -185,10 +185,31 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_series_name"
                     app:layout_constraintTop_toBottomOf="@id/tv_series_name" />
+
+                <TextView
+                    android:id="@+id/tv_relative_books"
+                    style="@style/SubHeader.Bold.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/rv_series_list"
+                    app:layout_constraintTop_toBottomOf="@id/rv_series_list"
+                    android:text="Похожие книги"
+                    tools:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_relative_books"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_relative_books"
+                    app:layout_constraintTop_toBottomOf="@id/tv_relative_books" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

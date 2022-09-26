@@ -56,4 +56,10 @@ class BooksRepositoryImpl @Inject constructor(
             booksDataSource.getAuthorBooks(authorName)
         }
     }
+
+    override suspend fun getRelativeBooks(genre: String): List<BooksSeriesModel> {
+        return withContext(ioDispatcher) {
+            booksDataSource.getRelativeBooks(genre)
+        }
+    }
 }
