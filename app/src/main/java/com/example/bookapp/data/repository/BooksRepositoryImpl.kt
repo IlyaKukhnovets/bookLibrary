@@ -39,6 +39,27 @@ class BooksRepositoryImpl @Inject constructor(
 
         }
 
+    override fun getBooksListWithArgs(argument: String): PagingSource<Int, BookItemModel> =
+        object : PagingSource<Int, BookItemModel>() {
+            override fun getRefreshKey(state: PagingState<Int, BookItemModel>): Int? = null
+
+            override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BookItemModel> {
+                return try {
+                    val offset = params.key ?: 0
+                    val limit = params.loadSize
+                    val data = booksDataSource.getBooksListWithArgs(limit, offset, argument)
+                    return LoadResult.Page(
+                        data = data,
+                        prevKey = null,
+                        nextKey = if (data.size == limit) offset + data.size else null
+                    )
+                } catch (e: Exception) {
+                    LoadResult.Error(e)
+                }
+            }
+
+        }
+
     override suspend fun getBookById(bookId: String): BookPreviewModel {
         return withContext(ioDispatcher) {
             booksDataSource.getBookById(bookId)

@@ -30,10 +30,22 @@
     <fragment
         android:id="@+id/bookPreviewFragment"
         android:name="com.example.bookapp.presentation.ui.book.BookPreviewFragment"
-        android:label="BookPreviewFragment"/>
+        android:label="BookPreviewFragment">
+        <action
+            android:id="@+id/action_bookPreviewFragment_to_allBooksFragment"
+            app:destination="@id/allBooksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/authorPreviewFragment"
         android:name="com.example.bookapp.presentation.ui.author.AuthorPreviewFragment"
-        android:label="AuthorPreviewFragment" />
+        android:label="AuthorPreviewFragment" >
+        <action
+            android:id="@+id/action_authorPreviewFragment_to_allBooksFragment"
+            app:destination="@id/allBooksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allBooksFragment"
+        android:name="com.example.bookapp.presentation.ui.all.AllBooksFragment"
+        android:label="AllBooksFragment" />
 
 </navigation>
