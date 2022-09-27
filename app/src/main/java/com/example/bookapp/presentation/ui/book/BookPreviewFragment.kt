@@ -18,6 +18,7 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
+import com.example.bookapp.presentation.ui.all.AllBooksFragment
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
 import com.example.bookapp.presentation.viewstate.book.BookPreviewViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
@@ -56,6 +57,12 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private fun initView() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
+        }
+        binding.tvBookAuthor.setOnClickListener {
+            val bundle = bundleOf(
+                AllBooksFragment.KEY_AUTHOR to binding.tvBookAuthor.text.toString()
+            )
+            findNavController().navigate(R.id.authorPreviewFragment, bundle)
         }
         binding.rvSeriesList.adapter = booksSeriesAdapter
         binding.rvSeriesList.layoutManager = LinearLayoutManager(context).apply {

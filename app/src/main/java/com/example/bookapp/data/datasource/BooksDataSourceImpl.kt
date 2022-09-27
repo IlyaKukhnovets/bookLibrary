@@ -24,6 +24,10 @@ class BooksDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getBooksListWithArgs(limit: Int, offset: Int, argument: String): List<BookItemModel> {
+        return  booksMapper(service.getBooks("$limit","$offset","author='$argument'"))
+    }
+
     override suspend fun getBookById(bookId: String): BookPreviewModel {
         return bookPreviewMapper(service.getBookById(bookId))
     }
