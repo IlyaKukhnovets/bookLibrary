@@ -38,7 +38,7 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private val booksSeriesAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
     private val relativeBooksAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
     private lateinit var savedImage: String
-    private lateinit var savedAuthor: String
+    private lateinit var savedBook: String
 
     private fun mapItems(viewState: BooksSeriesViewState.ViewState) =
         BooksSeriesItem(viewState, ::onItemListener)
@@ -93,7 +93,7 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
                         null
                     )
                 )
-                binding.toolbar.title = savedAuthor
+                binding.toolbar.title = savedBook
             } else {
                 binding.appBar.setBackgroundColor(Color.TRANSPARENT)
                 binding.toolbar.title = ""
@@ -137,7 +137,7 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private fun setScreenData(viewState: BookPreviewViewState) {
         val builder = StringBuilder()
         savedImage = viewState.image
-        savedAuthor = viewState.author
+        savedBook = viewState.bookName
 
         Glide.with(binding.root).load(viewState.image).transform(BlurTransformation(24))
             .into(binding.ivBackgroundTop)

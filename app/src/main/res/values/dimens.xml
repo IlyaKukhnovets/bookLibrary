@@ -4,7 +4,7 @@
     <dimen name="font_size_30_32">30dp</dimen>
     <dimen name="font_size_22_24">22dp</dimen>
     <dimen name="font_size_18_20">18dp</dimen>
-    <dimen name="font_size_14_16">14dp</dimen>
+    <dimen name="font_size_14_16">15dp</dimen>
     <dimen name="font_size_12_14">12dp</dimen>
     <dimen name="font_size_10_12">10dp</dimen>
 </resources>
