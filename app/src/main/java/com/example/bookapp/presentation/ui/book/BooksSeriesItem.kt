@@ -11,7 +11,7 @@ import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 
 class BooksSeriesItem(
     override val viewState: BooksSeriesViewState.ViewState,
-    private val itemListener: (String, String) -> Unit
+    private val itemListener: (BookPreviewViewModel.MyBooksArgs) -> Unit
 ) : BaseRecyclerItem<ItemBooksSeriesBinding, BooksSeriesViewState.ViewState> {
 
     override fun getViewId() = R.layout.item_books_series
@@ -29,7 +29,14 @@ class BooksSeriesItem(
         binding.tvBookAuthor.text = viewState.author
 
         binding.ivBookSeries.setOnClickListener {
-            itemListener.invoke(viewState.objectId, viewState.series)
+            itemListener.invoke(
+                BookPreviewViewModel.MyBooksArgs(
+                    objectId = viewState.objectId,
+                    series = viewState.series,
+                    genre = viewState.genre,
+                    bookId = viewState.id
+                )
+            )
         }
     }
 }

@@ -1,38 +1,40 @@
-package com.example.bookapp.presentation.ui.home
+package com.example.bookapp.presentation.ui.all
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.bookapp.data.repository.BooksRepository
 import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 import com.example.bookapp.presentation.viewstate.home.BookItemViewStateMapper
-import com.example.bookapp.presentation.viewstate.home.BookStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class MyFavouriteBooksViewModel @Inject constructor(
+class AllBooksViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val mapper: BookItemViewStateMapper
+    private val viewStateMapper: BookItemViewStateMapper
 ) : ViewModel() {
 
     private lateinit var flow: Flow<PagingData<BookItemViewState>>
 
-    fun init() {
-        flow = createFlow()
+    fun init(author: String) {
+        flow = createFlow(author)
     }
 
     fun getFlow() = flow
 
-    private fun createFlow(): Flow<PagingData<BookItemViewState>> {
+    private fun createFlow(author: String): Flow<PagingData<BookItemViewState>> {
         return Pager(
             PagingConfig(
                 pageSize = 20,
                 initialLoadSize = 20
             )
-        ) { booksRepository.getBooksList(BookStatus.FAVOURITE.status) }
+        ) { booksRepository.getBooksListWithArgs(author) }
             .flow
-            .map { books -> books.map { mapper(it) } }
+            .map { pagingData ->
+                pagingData.map { viewStateMapper(it) }
+            }
     }
-
 }

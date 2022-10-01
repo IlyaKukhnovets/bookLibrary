@@ -7,5 +7,6 @@ data class BooksSeriesModel(
     val objectId: String,
     val series: String?,
     val order: Int?,
-    val id: Int
+    val id: Int,
+    val genre: String
 )

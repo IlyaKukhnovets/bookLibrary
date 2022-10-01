@@ -18,6 +18,7 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
+import com.example.bookapp.presentation.ui.all.AllBooksFragment
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
 import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
 import com.example.bookapp.presentation.ui.book.BooksSeriesItem
@@ -33,6 +34,7 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
 
     private val binding by viewBinding(FragmentAuthorPreviewBinding::bind)
     private val viewModel by lazy { injectViewModel<AuthorPreviewViewModel>(factory) }
+    private val builder = StringBuilder()
 
     private val args by lazy {
         arguments?.getParcelable<AuthorPreviewViewModel.AuthorPreviewArgs>(KEY_ARGS)
@@ -80,6 +82,15 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
             viewModel.loadAuthorBooks(args.author)
             binding.refreshLayout.isRefreshing = false
         }
+        binding.ivAllAuthorsBooks.setOnClickListener {
+            val bundle = bundleOf(
+                AllBooksFragment.KEY_AUTHOR to args.author
+            )
+            findNavController().navigate(
+                R.id.action_authorPreviewFragment_to_allBooksFragment,
+                bundle
+            )
+        }
     }
 
     private fun initViewModel() {
@@ -101,20 +112,25 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
                 }
             }
         }
-        viewModel.authorLiveData.observe(viewLifecycleOwner) {
-            initLayout(it)
-        }
-        viewModel.authorBooksLiveData.observe(viewLifecycleOwner) {
-            binding.flAuthorBooks.show(it.isShowTitle)
-            authorBooksAdapter.replaceElementsWithDiffUtil(it.state)
-        }
+        viewModel.authorLiveData.observe(viewLifecycleOwner, ::observeLayout)
+        viewModel.authorBooksLiveData.observe(viewLifecycleOwner, ::observeBooks)
         viewModel.relativeAuthorsLiveData.observe(viewLifecycleOwner) {
-            binding.tvRelativeAuthorsTitle.show(it.isShowTitle)
+            binding.flRelativeAuthors.show(it.isShowTitle)
             authorsAdapter.replaceElementsWithDiffUtil(it.state)
         }
     }
 
-    private fun initLayout(it: AuthorItemViewState) {
+    private fun observeBooks(it: BooksSeriesViewState) {
+        binding.flAuthorBooks.show(it.isShowTitle)
+        binding.ivAllAuthorsBooks.show(it.isShowArrowButton)
+        binding.tvBooksCount.text = builder
+            .append(it.authorBooksCount)
+            .append(" книги")
+        authorBooksAdapter.replaceElementsWithDiffUtil(it.state)
+        builder.clear()
+    }
+
+    private fun observeLayout(it: AuthorItemViewState) {
         Glide.with(binding.root)
             .load(it.image)
             .transform(CircleCrop())
@@ -124,7 +140,6 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.Header_Bold)
         binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.Header_Bold_Primary)
         binding.tvBiography.text = it.biography
-        binding.tvRelativeAuthorsTitle.text = "Похожие авторы"
     }
 
     private fun onAuthorClick(item: AuthorRelativeViewState.ViewState) {
@@ -139,13 +154,9 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         findNavController().navigate(R.id.authorPreviewFragment, bundle)
     }
 
-    private fun onBookClick(objectId: String, bookSeries: String) {
+    private fun onBookClick(viewState: BookPreviewViewModel.MyBooksArgs) {
         val bundle = bundleOf(
-            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
-                objectId,
-                bookSeries,
-                args.genre
-            )
+            KEY_ARGS to viewState
         )
         findNavController().navigate(R.id.bookPreviewFragment, bundle)
     }

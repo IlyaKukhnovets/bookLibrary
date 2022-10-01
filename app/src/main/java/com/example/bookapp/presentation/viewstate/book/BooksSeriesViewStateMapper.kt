@@ -9,6 +9,8 @@ class BooksSeriesViewStateMapper @Inject constructor() :
     override fun invoke(entity: List<BooksSeriesModel>): BooksSeriesViewState {
         return BooksSeriesViewState(
             isShowTitle = entity.isNotEmpty(),
+            isShowArrowButton = entity.size > 2,
+            authorBooksCount = entity.size,
             state = entity.map {
                 BooksSeriesViewState.ViewState(
                     img = it.img,
@@ -17,7 +19,8 @@ class BooksSeriesViewStateMapper @Inject constructor() :
                     objectId = it.objectId,
                     series = it.series ?: "",
                     id = it.id,
-                    order = it.order ?: 0
+                    order = it.order ?: 0,
+                    genre = it.genre
                 )
             }
         )
