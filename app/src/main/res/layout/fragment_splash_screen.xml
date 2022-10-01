@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow_light"
+    android:background="@color/background_page"
     tools:context=".presentation.splash.SplashScreenFragment">
 
     <TextView
-        style="@style/Title.Bold"
+        style="@style/Title.Bold.Primary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

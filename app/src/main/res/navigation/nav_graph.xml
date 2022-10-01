@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_bookPreviewFragment_to_allBooksFragment"
             app:destination="@id/allBooksFragment" />
+        <action
+            android:id="@+id/action_bookPreviewFragment_to_imageDialog"
+            app:destination="@id/imageDialog" />
     </fragment>
     <fragment
         android:id="@+id/authorPreviewFragment"
@@ -47,5 +50,9 @@
         android:id="@+id/allBooksFragment"
         android:name="com.example.bookapp.presentation.ui.all.AllBooksFragment"
         android:label="AllBooksFragment" />
+    <dialog
+        android:id="@+id/imageDialog"
+        android:name="com.example.bookapp.presentation.ui.book.ImageDialog"
+        android:label="ImageDialog" />
 
 </navigation>

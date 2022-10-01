@@ -1,7 +1,9 @@
 package com.example.bookapp.presentation.ui.book
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -33,12 +35,10 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
     private val viewModel by lazy { injectViewModel<BookPreviewViewModel>(factory) }
     private val binding by viewBinding(FragmentBookPreviewBinding::bind)
-    private val booksSeriesAdapter = BaseRecyclerViewAdapter(
-        mapper = ::mapItems
-    )
-    private val relativeBooksAdapter = BaseRecyclerViewAdapter(
-        mapper = ::mapItems
-    )
+    private val booksSeriesAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
+    private val relativeBooksAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
+    private lateinit var savedImage: String
+    private lateinit var savedAuthor: String
 
     private fun mapItems(viewState: BooksSeriesViewState.ViewState) =
         BooksSeriesItem(viewState, ::onItemListener)
@@ -78,6 +78,27 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
             viewModel.loadRelativeBooks(args.genre, args.bookId)
             binding.refreshLayout.isRefreshing = false
         }
+        binding.ivBookImage.setOnClickListener {
+            val bundle = bundleOf(
+                KEY_ARGS to savedImage
+            )
+            findNavController().navigate(R.id.action_bookPreviewFragment_to_imageDialog, bundle)
+        }
+        binding.nestedScroll.setOnScrollChangeListener { _, _, _, _, oldScrollY ->
+            if (oldScrollY > 90) {
+                binding.appBar.setBackgroundColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.background_page,
+                        null
+                    )
+                )
+                binding.toolbar.title = savedAuthor
+            } else {
+                binding.appBar.setBackgroundColor(Color.TRANSPARENT)
+                binding.toolbar.title = ""
+            }
+        }
     }
 
     private fun initViewModel() {
@@ -115,6 +136,9 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
     private fun setScreenData(viewState: BookPreviewViewState) {
         val builder = StringBuilder()
+        savedImage = viewState.image
+        savedAuthor = viewState.author
+
         Glide.with(binding.root).load(viewState.image).transform(BlurTransformation(24))
             .into(binding.ivBackgroundTop)
         Glide.with(binding.root).load(viewState.image).transform(RoundedCorners(12))

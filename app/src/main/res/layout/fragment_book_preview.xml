@@ -9,7 +9,9 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_page"
+        android:background="@null"
+        app:elevation="0dp"
+        android:translationZ="0.1dp"
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
@@ -17,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentInsetStart="0dp"
+
             app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:navigationIcon="@drawable/ic_arrow_back" />
@@ -26,10 +29,10 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -65,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginTop="72dp"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -77,18 +80,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:text="Автор:"
                     app:layout_constraintStart_toStartOf="@id/tv_book_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
-                    android:text="Автор:" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_book_name" />
 
                 <TextView
                     android:id="@+id/tv_book_author"
-                    android:clickable="true"
-                    android:focusable="true"
                     style="@style/SubHeader.Bold.Primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="@+id/book_author_title"
                     app:layout_constraintTop_toBottomOf="@+id/book_author_title"
@@ -101,7 +104,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shape_rounded_corners_8dp"
+                    android:clickable="true"
                     android:elevation="4dp"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:scaleType="fitXY"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_book_author"
@@ -139,11 +145,11 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
+                    android:text="О книге"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_book_image"
-                    android:text="О книге" />
+                    app:layout_constraintTop_toBottomOf="@+id/iv_book_image" />
 
                 <TextView
                     android:id="@+id/tv_book_description"
@@ -163,10 +169,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:text="Входит в серию"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/tv_book_description"
                     app:layout_constraintTop_toBottomOf="@id/tv_book_description"
-                    android:text="Входит в серию"
                     tools:visibility="visible" />
 
                 <TextView
@@ -197,10 +203,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:text="Похожие книги"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/rv_series_list"
                     app:layout_constraintTop_toBottomOf="@id/rv_series_list"
-                    android:text="Похожие книги"
                     tools:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView

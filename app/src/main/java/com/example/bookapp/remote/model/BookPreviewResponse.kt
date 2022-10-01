@@ -10,7 +10,7 @@ data class BookPreviewResponse(
     @Json(name = "author")
     val author: String,
     @Json(name = "src")
-    val src: String?,
+    val src: String,
     @Json(name = "pages")
     val pages: Int?,
     @Json(name = "description")
