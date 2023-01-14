@@ -15,8 +15,8 @@ import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
-import com.example.bookapp.presentation.ui.author.AuthorPreviewViewModel
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
+import com.example.bookapp.presentation.viewstate.author.AuthorPreviewArgs
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
@@ -76,7 +76,7 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
 
     private fun itemListener(item: AuthorItemViewState) {
         val bundle = bundleOf(
-            KEY_ARGS to AuthorPreviewViewModel.AuthorPreviewArgs(
+            KEY_ARGS to AuthorPreviewArgs(
                 item.objectId,
                 item.genre,
                 item.id,

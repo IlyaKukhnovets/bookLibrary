@@ -20,7 +20,7 @@ import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
-import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
+import com.example.bookapp.presentation.viewstate.book.MyBooksArgs
 import com.example.bookapp.presentation.viewstate.home.BookItemViewState
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -105,7 +105,7 @@ class MyFavouriteBooksFragment : BaseFragment(R.layout.fragment_my_favourite_boo
 
     private fun itemListener(item: BookItemViewState) {
         val bundle = bundleOf(
-            KEY_ARGS to BookPreviewViewModel.MyBooksArgs(
+            KEY_ARGS to MyBooksArgs(
                 item.objectId,
                 item.series,
                 item.genre,

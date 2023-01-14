@@ -80,12 +80,19 @@
                     android:orientation="vertical"
                     tools:ignore="UseCompoundDrawables">
 
-                    <TextView
+                    <io.github.glailton.expandabletextview.ExpandableTextView
                         android:id="@+id/tv_biography"
                         style="@style/Base.Primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp" />
+                        android:layout_marginTop="16dp"
+                        app:animDuration="500"
+                        app:collapsedLines="10"
+                        app:ellipsizeTextColor="@color/yellow_dark"
+                        app:readLessText="Свернуть"
+                        app:readMoreText="Читать далее"
+                        app:textMode="line"
+                        tools:text="Биография автора" />
 
                     <FrameLayout
                         android:id="@+id/fl_author_books"

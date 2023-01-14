@@ -20,11 +20,11 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
-import com.example.bookapp.presentation.ui.all.AllBooksFragment
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
+import com.example.bookapp.presentation.viewstate.author.AuthorPreviewArgs
 import com.example.bookapp.presentation.viewstate.book.BookPreviewViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
-import com.example.bookapp.presentation.viewstate.home.BookStatus
+import com.example.bookapp.presentation.viewstate.book.MyBooksArgs
 import jp.wasabeef.glide.transformations.BlurTransformation
 import javax.inject.Inject
 
@@ -37,14 +37,12 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private val binding by viewBinding(FragmentBookPreviewBinding::bind)
     private val booksSeriesAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
     private val relativeBooksAdapter = BaseRecyclerViewAdapter(mapper = ::mapItems)
-    private lateinit var savedImage: String
-    private lateinit var savedBook: String
 
     private fun mapItems(viewState: BooksSeriesViewState.ViewState) =
         BooksSeriesItem(viewState, ::onItemListener)
 
     private val args by lazy {
-        arguments?.getParcelable<BookPreviewViewModel.MyBooksArgs>(KEY_ARGS)
+        arguments?.getParcelable<MyBooksArgs>(KEY_ARGS)
             ?: throw IllegalArgumentException("Need arguments")
     }
 
@@ -57,12 +55,6 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
     private fun initView() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
-        }
-        binding.tvBookAuthor.setOnClickListener {
-            val bundle = bundleOf(
-                AllBooksFragment.KEY_AUTHOR to binding.tvBookAuthor.text.toString()
-            )
-            findNavController().navigate(R.id.authorPreviewFragment, bundle)
         }
         binding.rvSeriesList.adapter = booksSeriesAdapter
         binding.rvSeriesList.layoutManager = LinearLayoutManager(context).apply {
@@ -80,23 +72,36 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
         }
         binding.ivBookImage.setOnClickListener {
             val bundle = bundleOf(
-                KEY_ARGS to savedImage
+                KEY_ARGS to viewModel.getSavedImage()
             )
             findNavController().navigate(R.id.action_bookPreviewFragment_to_imageDialog, bundle)
         }
-        binding.nestedScroll.setOnScrollChangeListener { _, _, _, _, oldScrollY ->
-            if (oldScrollY > 90) {
-                binding.appBar.setBackgroundColor(
-                    ResourcesCompat.getColor(
-                        resources,
-                        R.color.background_page,
-                        null
+        binding.nestedScroll.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            when {
+                oldScrollY > 90 -> {
+                    binding.appBar.setBackgroundColor(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.background_page,
+                            null
+                        )
                     )
-                )
-                binding.toolbar.title = savedBook
-            } else {
-                binding.appBar.setBackgroundColor(Color.TRANSPARENT)
-                binding.toolbar.title = ""
+                    binding.toolbar.title = viewModel.getSavedBook()
+                }
+                oldScrollY == 0 && scrollY > 90 -> {
+                    binding.appBar.setBackgroundColor(
+                        ResourcesCompat.getColor(
+                            resources,
+                            R.color.background_page,
+                            null
+                        )
+                    )
+                    binding.toolbar.title = viewModel.getSavedBook()
+                }
+                else -> {
+                    binding.appBar.setBackgroundColor(Color.TRANSPARENT)
+                    binding.toolbar.title = ""
+                }
             }
         }
     }
@@ -136,8 +141,6 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
     private fun setScreenData(viewState: BookPreviewViewState) {
         val builder = StringBuilder()
-        savedImage = viewState.image
-        savedBook = viewState.bookName
 
         Glide.with(binding.root).load(viewState.image).transform(BlurTransformation(24))
             .into(binding.ivBackgroundTop)
@@ -146,24 +149,29 @@ class BookPreviewFragment : BaseFragment(R.layout.fragment_book_preview), Inject
 
         binding.tvBookName.text = viewState.bookName
         binding.tvBookAuthor.text = viewState.author
-        binding.tvBookStatus.text = mapBookStatus(viewState.status)
+        binding.tvBookStatus.text = viewState.status
         binding.tvBookDescription.text = viewState.bookDescription
         binding.tvBookPagesCount.text =
             builder.append(viewState.pagesCount.toString()).append(" печатных стр.")
         binding.tvBookStatus.visibility = View.VISIBLE
         binding.tvSeriesName.text = viewState.series
-    }
-
-    private fun mapBookStatus(status: BookStatus): String {
-        return when (status) {
-            BookStatus.READ -> "Хочу прочитать"
-            BookStatus.FINISHED -> "Прочитал"
-            BookStatus.FAVOURITE -> "Избранное"
-            BookStatus.NOT_READ -> "Не читал"
+        binding.tvBookAuthor.setOnClickListener {
+            viewState.authorObject?.let {
+                val bundle = bundleOf(
+                    KEY_ARGS to AuthorPreviewArgs(
+                        it.objectId,
+                        viewState.genre,
+                        it.id,
+                        viewState.author
+                    )
+                )
+                findNavController().navigate(R.id.authorPreviewFragment, bundle)
+            }
         }
+        builder.clear()
     }
 
-    private fun onItemListener(viewState: BookPreviewViewModel.MyBooksArgs) {
+    private fun onItemListener(viewState: MyBooksArgs) {
         val bundle = bundleOf(
             KEY_ARGS to viewState
         )

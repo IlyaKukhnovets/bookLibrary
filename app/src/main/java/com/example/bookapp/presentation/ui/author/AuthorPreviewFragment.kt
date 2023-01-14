@@ -20,10 +20,11 @@ import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
 import com.example.bookapp.presentation.ui.all.AllBooksFragment
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
-import com.example.bookapp.presentation.ui.book.BookPreviewViewModel
 import com.example.bookapp.presentation.ui.book.BooksSeriesItem
+import com.example.bookapp.presentation.viewstate.author.AuthorPreviewArgs
 import com.example.bookapp.presentation.viewstate.author.AuthorRelativeViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
+import com.example.bookapp.presentation.viewstate.book.MyBooksArgs
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 import javax.inject.Inject
 
@@ -34,10 +35,9 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
 
     private val binding by viewBinding(FragmentAuthorPreviewBinding::bind)
     private val viewModel by lazy { injectViewModel<AuthorPreviewViewModel>(factory) }
-    private val builder = StringBuilder()
 
     private val args by lazy {
-        arguments?.getParcelable<AuthorPreviewViewModel.AuthorPreviewArgs>(KEY_ARGS)
+        arguments?.getParcelable<AuthorPreviewArgs>(KEY_ARGS)
             ?: throw IllegalArgumentException(
                 "Need arguments for ${this.javaClass}"
             )
@@ -121,6 +121,7 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
     }
 
     private fun observeBooks(it: BooksSeriesViewState) {
+        val builder = StringBuilder()
         binding.flAuthorBooks.show(it.isShowTitle)
         binding.ivAllAuthorsBooks.show(it.isShowArrowButton)
         binding.tvBooksCount.text = builder
@@ -144,7 +145,7 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
 
     private fun onAuthorClick(item: AuthorRelativeViewState.ViewState) {
         val bundle = bundleOf(
-            KEY_ARGS to AuthorPreviewViewModel.AuthorPreviewArgs(
+            KEY_ARGS to AuthorPreviewArgs(
                 item.objectId,
                 item.genre,
                 item.id,
@@ -154,7 +155,7 @@ class AuthorPreviewFragment : BaseFragment(R.layout.fragment_author_preview), In
         findNavController().navigate(R.id.authorPreviewFragment, bundle)
     }
 
-    private fun onBookClick(viewState: BookPreviewViewModel.MyBooksArgs) {
+    private fun onBookClick(viewState: MyBooksArgs) {
         val bundle = bundleOf(
             KEY_ARGS to viewState
         )
