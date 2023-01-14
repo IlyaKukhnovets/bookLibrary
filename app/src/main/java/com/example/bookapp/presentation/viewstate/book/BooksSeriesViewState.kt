@@ -14,6 +14,7 @@ data class BooksSeriesViewState(
         val series: String,
         val order: Int,
         val id: Int,
-        val genre: String
+        val genre: String,
+        val isShowOrder: Boolean,
     )
 }

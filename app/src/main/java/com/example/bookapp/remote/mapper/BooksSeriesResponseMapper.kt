@@ -6,9 +6,9 @@ import com.example.bookapp.remote.model.BooksSeriesResponse
 import javax.inject.Inject
 
 class BooksSeriesResponseMapper @Inject constructor() :
-    Mapper<List<BooksSeriesResponse>, List<BooksSeriesModel>> {
-    override fun invoke(response: List<BooksSeriesResponse>): List<BooksSeriesModel> {
-        return response.map {
+    Mapper<Pair<List<BooksSeriesResponse>,Boolean>, List<BooksSeriesModel>> {
+    override fun invoke(response: Pair<List<BooksSeriesResponse>,Boolean>): List<BooksSeriesModel> {
+        return response.first.map {
             BooksSeriesModel(
                 img = it.src,
                 author = it.author,
@@ -17,7 +17,8 @@ class BooksSeriesResponseMapper @Inject constructor() :
                 series = it.series,
                 id = it.id,
                 order = it.seriesOrder,
-                genre = it.genre
+                genre = it.genre,
+                isShowOrder = response.second
             )
         }
     }

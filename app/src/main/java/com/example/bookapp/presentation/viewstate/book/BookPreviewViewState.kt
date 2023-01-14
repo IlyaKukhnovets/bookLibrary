@@ -1,15 +1,19 @@
 package com.example.bookapp.presentation.viewstate.book
 
-import com.example.bookapp.presentation.viewstate.home.BookStatus
-
 data class BookPreviewViewState(
     val bookName: String,
     val author: String,
     val image: String,
     val pagesCount: Int,
     val bookDescription: String?,
-    val status: BookStatus,
+    val status: String,
     val genre: String,
     val seriesOrder: Int?,
-    val series: String?
+    val series: String?,
+    val authorObject: BookAuthorViewState?
+)
+
+data class BookAuthorViewState(
+    val id: Int,
+    val objectId: String
 )

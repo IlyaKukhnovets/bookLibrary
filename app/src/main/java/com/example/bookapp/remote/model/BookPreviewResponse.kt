@@ -23,4 +23,14 @@ data class BookPreviewResponse(
     val genre: String,
     @Json(name = "series_order")
     val seriesOrder: Int?,
+    @Json(name = "author_object")
+    val authorObject: BookAuthorResponse?
+)
+
+@JsonClass(generateAdapter = true)
+data class BookAuthorResponse(
+    @Json(name = "id")
+    val id: Int,
+    @Json(name = "objectId")
+    val objectId: String
 )

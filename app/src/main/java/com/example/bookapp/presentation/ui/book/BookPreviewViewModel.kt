@@ -1,6 +1,5 @@
 package com.example.bookapp.presentation.ui.book
 
-import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,6 @@ import com.example.bookapp.presentation.viewstate.book.BookPreviewViewStateMappe
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewState
 import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewStateMapper
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 class BookPreviewViewModel @Inject constructor(
@@ -75,12 +73,8 @@ class BookPreviewViewModel @Inject constructor(
         }
     }
 
-    @Parcelize
-    data class MyBooksArgs(
-        val objectId: String,
-        val series: String?,
-        val genre: String,
-        val bookId: Int
-    ) : Parcelable
+    fun getSavedBook() = _bookLiveData.value?.bookName
+
+    fun getSavedImage() = _bookLiveData.value?.image
 
 }

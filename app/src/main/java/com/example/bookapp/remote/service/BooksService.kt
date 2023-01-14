@@ -22,11 +22,18 @@ interface BooksService {
 
     @GET("$SERVICE_PREFIX/{objectId}")
     suspend fun getBookById(
-        @Path("objectId") objectId: String
+        @Path("objectId") objectId: String,
+        @Query("loadRelations") args: String
     ): BookPreviewResponse
 
     @GET("$SERVICE_PREFIX?")
     suspend fun getBooksWithArgs(
         @Query("where") args: String
+    ): List<BooksSeriesResponse>
+
+    @GET("$SERVICE_PREFIX?")
+    suspend fun getBookSeries(
+        @Query("where") args: String,
+        @Query("sortBy") sortOrder: String
     ): List<BooksSeriesResponse>
 }
