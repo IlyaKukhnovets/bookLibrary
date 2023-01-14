@@ -1,6 +1,5 @@
 package com.example.bookapp.presentation.ui.author
 
-import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,6 @@ import com.example.bookapp.presentation.viewstate.book.BooksSeriesViewStateMappe
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewStateMapper
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 class AuthorPreviewViewModel @Inject constructor(
@@ -79,13 +77,5 @@ class AuthorPreviewViewModel @Inject constructor(
             }
         }
     }
-
-    @Parcelize
-    data class AuthorPreviewArgs(
-        val objectId: String,
-        val genre: String,
-        val authorId: Int,
-        val author: String
-    ) : Parcelable
 
 }
