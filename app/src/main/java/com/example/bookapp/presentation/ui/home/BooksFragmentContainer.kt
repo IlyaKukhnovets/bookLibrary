@@ -15,6 +15,7 @@ import com.example.bookapp.presentation.base.BaseFragment
 import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.base.ViewPager2Adapter
 import com.example.bookapp.presentation.extensions.injectViewModel
+import com.example.bookapp.presentation.splash.BottomNavCallback
 import com.example.bookapp.presentation.ui.base.KEY_ARGS
 import com.example.bookapp.presentation.viewstate.author.AuthorPreviewArgs
 import com.example.bookapp.presentation.viewstate.home.AuthorItemViewState
@@ -35,6 +36,7 @@ class BooksFragmentContainer : BaseFragment(R.layout.fragment_books_container), 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? BottomNavCallback)?.showBottomNavigation()
         initView()
         initViewModel()
     }
