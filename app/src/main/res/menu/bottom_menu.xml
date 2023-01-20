@@ -3,11 +3,11 @@
     <item
         android:id="@id/booksFragmentContainer"
         android:icon="@drawable/ic_menu_book"
-        android:title="Books" />
+        android:title="Книги" />
 
     <item
         android:id="@+id/booksInfoFragment"
         android:icon="@drawable/ic_menu_chart"
-        android:title="Info" />
+        android:title="Статистика" />
 
 </menu>

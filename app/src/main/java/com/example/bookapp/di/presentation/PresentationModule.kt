@@ -10,6 +10,7 @@ import dagger.Module
     includes = [
         BooksModule::class,
         AuthorModule::class,
+        InfoModule::class,
         MainActivityModule::class,
     ]
 )

@@ -36,4 +36,6 @@ interface BooksService {
         @Query("where") args: String,
         @Query("sortBy") sortOrder: String
     ): List<BooksSeriesResponse>
+
+    suspend fun getBooksInfo()
 }
