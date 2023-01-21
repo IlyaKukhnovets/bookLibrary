@@ -2,19 +2,24 @@ package com.example.bookapp.data.datasource
 
 import com.example.bookapp.data.model.book.BookItemModel
 import com.example.bookapp.data.model.book.BookPreviewModel
+import com.example.bookapp.data.model.book.BooksInfoModel
 import com.example.bookapp.data.model.book.BooksSeriesModel
 import com.example.bookapp.presentation.viewstate.home.BookStatus
 import com.example.bookapp.remote.mapper.BookPreviewResponseMapper
+import com.example.bookapp.remote.mapper.BooksInfoResponseMapper
 import com.example.bookapp.remote.mapper.BooksResponseMapper
 import com.example.bookapp.remote.mapper.BooksSeriesResponseMapper
 import com.example.bookapp.remote.service.BooksService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class BooksDataSourceImpl @Inject constructor(
     private val service: BooksService,
     private val booksMapper: BooksResponseMapper,
     private val bookPreviewMapper: BookPreviewResponseMapper,
-    private val booksSeriesResponseMapper: BooksSeriesResponseMapper
+    private val booksSeriesResponseMapper: BooksSeriesResponseMapper,
+    private val booksInfoResponseMapper: BooksInfoResponseMapper
 ) : BooksDataSource {
     override suspend fun getBooksList(limit: Int, offset: Int, status: Int?): List<BookItemModel> {
         return if (status != null) {
@@ -75,6 +80,13 @@ class BooksDataSourceImpl @Inject constructor(
                 second = false
             )
         )
+    }
+    override suspend fun getBooksInfo(argument: String): Flow<List<BooksInfoModel>> {
+        return flowOf(booksInfoResponseMapper.invoke(service.getBooksInfo(
+            firstArg = argument,
+            secondArg = "Count('$argument')",
+            groupBy = argument
+        )))
     }
 
 }

@@ -21,7 +21,8 @@ class BooksInfoItem(
 
     override fun renderView(binding: ItemBooksInfoBinding, positionInAdapter: Int) {
         with(binding) {
-
+            tvTitle.text = viewState.genre
+            tvCount.text = viewState.count.toString()
         }
     }
 }

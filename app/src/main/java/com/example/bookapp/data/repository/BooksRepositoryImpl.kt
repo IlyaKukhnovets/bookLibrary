@@ -6,8 +6,11 @@ import com.example.bookapp.data.datasource.BooksDataSource
 import com.example.bookapp.data.model.book.BookItemModel
 import com.example.bookapp.data.model.book.BookPreviewModel
 import com.example.bookapp.data.model.book.BooksSeriesModel
+import com.example.bookapp.data.model.book.CombinedBooksInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -81,6 +84,19 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun getRelativeBooks(genre: String, bookId: Int): List<BooksSeriesModel> {
         return withContext(ioDispatcher) {
             booksDataSource.getRelativeBooks(genre, bookId)
+        }
+    }
+
+    override suspend fun getBooksInfo(): Flow<CombinedBooksInfo> {
+        return withContext(ioDispatcher) {
+            val genreItems = booksDataSource.getBooksInfo("genre")
+            val authorItems = booksDataSource.getBooksInfo("author")
+            genreItems.combine(authorItems) { genre, author ->
+                CombinedBooksInfo(
+                    genreItems = genre,
+                    authorItems = author
+                )
+            }
         }
     }
 }
