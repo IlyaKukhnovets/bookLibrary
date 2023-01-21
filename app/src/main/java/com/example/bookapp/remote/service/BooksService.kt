@@ -1,6 +1,7 @@
 package com.example.bookapp.remote.service
 
 import com.example.bookapp.remote.model.BookPreviewResponse
+import com.example.bookapp.remote.model.BooksInfoResponse
 import com.example.bookapp.remote.model.BooksResponse
 import com.example.bookapp.remote.model.BooksSeriesResponse
 import retrofit2.http.GET
@@ -37,5 +38,10 @@ interface BooksService {
         @Query("sortBy") sortOrder: String
     ): List<BooksSeriesResponse>
 
-    suspend fun getBooksInfo()
+    @GET(SERVICE_PREFIX)
+    suspend fun getBooksInfo(
+        @Query("property") firstArg: String,
+        @Query("property") secondArg: String,
+        @Query("groupBy") groupBy: String
+    ): List<BooksInfoResponse>
 }
