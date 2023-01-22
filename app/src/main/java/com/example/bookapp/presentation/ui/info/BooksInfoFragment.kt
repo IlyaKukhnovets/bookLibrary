@@ -13,7 +13,7 @@ import com.example.bookapp.presentation.base.BaseRecyclerViewAdapter
 import com.example.bookapp.presentation.extensions.gone
 import com.example.bookapp.presentation.extensions.injectViewModel
 import com.example.bookapp.presentation.extensions.show
-import com.example.bookapp.presentation.viewstate.info.BookInfoViewState
+import com.example.bookapp.presentation.viewstate.info.BooksInfoBaseViewState
 import javax.inject.Inject
 
 class BooksInfoFragment : BaseFragment(R.layout.fragment_books), Injectable {
@@ -27,7 +27,7 @@ class BooksInfoFragment : BaseFragment(R.layout.fragment_books), Injectable {
         mapper = ::mapItems
     )
 
-    private fun mapItems(vs: BookInfoViewState) = BooksInfoItem(vs)
+    private fun mapItems(vs: BooksInfoBaseViewState) = BooksInfoItem.newInstance(vs)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

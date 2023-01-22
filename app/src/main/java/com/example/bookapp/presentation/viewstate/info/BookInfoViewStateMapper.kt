@@ -5,18 +5,37 @@ import com.example.bookapp.presentation.viewstate.Mapper
 import javax.inject.Inject
 
 class BookInfoViewStateMapper @Inject constructor() :
-    Mapper<CombinedBooksInfo, List<BookInfoViewState>> {
-    override fun invoke(entity: CombinedBooksInfo): List<BookInfoViewState> {
-        val genreItems = mutableListOf<BookInfoViewState>()
-        entity.genreItems.map {
-            genreItems.add(
-                BookInfoViewState(
+    Mapper<CombinedBooksInfo, List<BooksInfoBaseViewState>> {
+    override fun invoke(entity: CombinedBooksInfo): List<BooksInfoBaseViewState> {
+        val items = mutableListOf<BooksInfoBaseViewState>()
+        items.add(
+            BooksInfoBaseViewState.SectionHeader(
+                title = "Самые популярные жанры"
+            )
+        )
+        val sortedGenres = entity.genreItems.sortedByDescending { it.count }
+        sortedGenres.map {
+            items.add(
+                BooksInfoBaseViewState.GenresViewState(
                     count = it.count,
-                    genre = it.genre
+                    genre = it.genre!!
                 )
             )
         }
-        return genreItems
+        items.add(
+            BooksInfoBaseViewState.SectionHeader(
+                title = "Любимые авторы"
+            )
+        )
+        val sortedAuthors = entity.authorItems.sortedByDescending { it.count }
+        sortedAuthors.map {
+            items.add(
+                BooksInfoBaseViewState.AuthorsViewState(
+                    count = it.count,
+                    author = it.author!!
+                )
+            )
+        }
+        return items
     }
-
 }

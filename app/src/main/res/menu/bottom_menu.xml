@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/booksInfoFragment"
-        android:icon="@drawable/ic_menu_chart"
-        android:title="Статистика" />
+        android:icon="@drawable/ic_menu_user"
+        android:title="Профиль" />
 
 </menu>
